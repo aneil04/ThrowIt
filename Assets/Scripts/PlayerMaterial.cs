@@ -26,17 +26,6 @@ public class PlayerMaterial : MonoBehaviour
 
     void Start()
     {
-
-
-        //TODO: put this stuff in another script and use it to control the outline of the player
-        // if (photonView.IsMine)
-        // {
-        //     playerRenderer.material.color = friendly;
-        //     return;
-        // }
-
-        // playerRenderer.material.color = enemy;
-
         int colorIndex = 0;
 
         colorIndex = (int)Random.Range(0, skinColors.Length);
