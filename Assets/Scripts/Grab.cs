@@ -19,7 +19,7 @@ public class Grab : MonoBehaviourPun
     public const byte THROW_OBJ_CODE = 2;
     public Animator playerAnimator;
     private PhotonView myPhotonView;
-
+    private float grabInputVal = 0;
     private void Start()
     {
         myPhotonView = GetComponentInParent<PhotonView>();
@@ -85,14 +85,16 @@ public class Grab : MonoBehaviourPun
         grabCdTimer = grabCooldown;
     }
 
+    public void updateGrabInput() {
+        grabInputVal = 1;
+    }
+
     void FixedUpdate()
     {
         if (!myPhotonView.IsMine) { return; }
 
         grabCdTimer -= Time.fixedDeltaTime;
         if (grabCdTimer < 0) { grabCdTimer = 0; }
-
-        float grabInputVal = 0;
 
         if (grabInputVal == 1 && isGrabbing == false && grabCdTimer == 0)
         {
@@ -106,6 +108,8 @@ public class Grab : MonoBehaviourPun
         {
             callThrow();
         }
+
+        grabInputVal = 0;
     }
 
     private void grabObject(int grabObjViewID, int otherPlayerPV)

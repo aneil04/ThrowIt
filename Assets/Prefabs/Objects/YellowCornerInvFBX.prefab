@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7337599553599051898}
   m_Layer: 0
   m_Name: YellowCornerInvFBX
-  m_TagString: Untagged
+  m_TagString: floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
