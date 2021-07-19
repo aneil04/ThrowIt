@@ -7,7 +7,8 @@ public class PlayerName : MonoBehaviour
 {
     public static PlayerName instance;
     public TMP_InputField nameInput;
-    [SerializeField] private string playerName;
+    private string playerName;
+
     void Start()
     {
         if (instance != null)
@@ -21,14 +22,24 @@ public class PlayerName : MonoBehaviour
 
         DontDestroyOnLoad(this.gameObject);
     }
+    public void FindInput()
+    {
+        nameInput = GameObject.Find("UI").GetComponentInChildren<Canvas>().GetComponentInChildren<TMP_InputField>();
 
+        setName();
+    }
     public void setName()
     {
-        this.playerName = nameInput.text;
+        string txt = nameInput.text;
+        this.playerName = txt;
     }
 
     public string getName()
     {
         return this.playerName;
+    }
+
+    public void DestroyThis() {
+        Destroy(this.gameObject);
     }
 }

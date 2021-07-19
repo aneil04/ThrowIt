@@ -12,10 +12,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     //connect to the master server
     public void connectToServer()
     {
-        playerName.setName();
+        playerName.FindInput();
 
-        Debug.Log("Connecting to server");
-        PhotonNetwork.ConnectUsingSettings();
+        if (!PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.ConnectUsingSettings();
+        }
+        else
+        {
+            OnConnectedToMaster();
+        }
     }
 
     //once connected to master, join a lobby

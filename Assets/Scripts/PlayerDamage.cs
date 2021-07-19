@@ -12,6 +12,7 @@ public class PlayerDamage : MonoBehaviourPun
     [SerializeField] private float health;
     public float maxHealth;
     public Slider slider;
+    public PhotonView pv;
 
     void Start()
     {
@@ -40,6 +41,12 @@ public class PlayerDamage : MonoBehaviourPun
         slider.value = this.health;
 
         return this.health;
+    }
+
+    void LateUpdate() {
+        this.health -= .5f;
+        setHealth(this.health);
+        isPlayerDead(this.health);
     }
 
     void OnCollisionEnter(Collision col)
@@ -81,5 +88,17 @@ public class PlayerDamage : MonoBehaviourPun
             object[] data = (object[])photonEvent.CustomData;
             damagePlayer((int)data[0], (float)data[1]);
         }
+    }
+
+    public void isPlayerDead(float currentHealth) {
+        if (currentHealth >= 0) {
+            return;
+        }
+
+        GameObject.FindGameObjectsWithTag("Persist")[0].GetComponent<PlayerName>().DestroyThis();
+
+        PhotonNetwork.Disconnect();
+        PhotonNetwork.LoadLevel("DeathScreen");
+        PhotonNetwork.Destroy(this.pv);
     }
 }
