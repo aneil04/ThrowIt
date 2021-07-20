@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8475580118629737237}
   - component: {fileID: 4769475433626791088}
   - component: {fileID: 7337599553599051898}
+  - component: {fileID: -1160745934187658138}
   m_Layer: 0
   m_Name: YellowCornerInvFBX
   m_TagString: floor
@@ -81,3 +82,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &-1160745934187658138
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9139105030953613743}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4493585093827132993, guid: 1ca15f05fd9497840bae2295391c68d3, type: 3}

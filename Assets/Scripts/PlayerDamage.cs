@@ -13,6 +13,8 @@ public class PlayerDamage : MonoBehaviourPun
     public float maxHealth;
     public Slider slider;
     public PhotonView pv;
+    public Animator playerAnimator;
+    public Rigidbody rb;
 
     void Start()
     {
@@ -44,7 +46,10 @@ public class PlayerDamage : MonoBehaviourPun
     }
 
     void LateUpdate() {
-        this.health -= .5f;
+        if (playerAnimator.GetBool("isHit") && this.rb.velocity.magnitude < .5f) {
+            playerAnimator.SetBool("isHit", false);
+        }
+        
         setHealth(this.health);
         isPlayerDead(this.health);
     }
@@ -68,6 +73,7 @@ public class PlayerDamage : MonoBehaviourPun
 
     private void damagePlayer(int viewID, float velMag)
     {
+        playerAnimator.SetBool("isHit", true);
         GameObject player = PhotonView.Find(viewID).gameObject;
         PlayerDamage playerDamage = player.GetComponent<PlayerDamage>();
 

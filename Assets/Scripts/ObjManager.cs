@@ -33,7 +33,7 @@ public class ObjManager : MonoBehaviour
             objToSpawn.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
             Vector3 spawnPos = new Vector3(Random.Range(xBounds.x, xBounds.y), yHeight, Random.Range(zBounds.x, zBounds.y));
-            PhotonNetwork.Instantiate(objToSpawn.name, spawnPos, Quaternion.identity);
+            PhotonNetwork.InstantiateRoomObject(objToSpawn.name, spawnPos, Quaternion.identity);
         }
     }
 
@@ -45,6 +45,6 @@ public class ObjManager : MonoBehaviour
         objToSpawn.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
         Vector3 spawnPos = new Vector3(Random.Range(xBounds.x, xBounds.y), yHeight, Random.Range(zBounds.x, zBounds.y));
-        PhotonNetwork.Instantiate(objToSpawn.name, spawnPos, Quaternion.identity);
+        PhotonNetwork.InstantiateRoomObject(objToSpawn.name, spawnPos, Quaternion.identity);
     }
 }

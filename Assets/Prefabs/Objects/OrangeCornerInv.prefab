@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 6762097527600915675}
   - component: {fileID: 7671899877575240574}
   - component: {fileID: 5592598838988562356}
+  - component: {fileID: -4894954620621826611}
   m_Layer: 0
-  m_Name: CornerCornerInvFBX
+  m_Name: OrangeCornerInv
   m_TagString: floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,3 +82,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &-4894954620621826611
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6240893365832089185}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4493585093827132993, guid: 1ca15f05fd9497840bae2295391c68d3, type: 3}
