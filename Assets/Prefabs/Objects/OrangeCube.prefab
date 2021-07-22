@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3288258115345232188}
   - component: {fileID: 3288258115345232191}
   - component: {fileID: 3123764954759635389}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: OrangeCube
   m_TagString: floor
   m_Icon: {fileID: 0}

@@ -46,7 +46,7 @@ public class PlayerDamage : MonoBehaviourPun
     }
 
     void LateUpdate() {
-        if (playerAnimator.GetBool("isHit") && this.rb.velocity.magnitude < .5f) {
+        if (playerAnimator.GetBool("isHit") && this.rb.velocity.magnitude < .001f) {
             playerAnimator.SetBool("isHit", false);
         }
         
@@ -56,13 +56,15 @@ public class PlayerDamage : MonoBehaviourPun
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag != "floor")
+        if (col.gameObject.tag == "Grabable")
         {
             GameObject obj = col.gameObject;
             Rigidbody objRB = obj.GetComponent<Rigidbody>();
 
             if (objRB.velocity.magnitude > 1)
             {
+                this.playerAnimator.SetBool("isHit", true);
+                
                 //raise event for all players including local client to damage the object
                 object[] data = new object[] { this.gameObject.GetPhotonView().ViewID, objRB.velocity.magnitude };
                 RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
@@ -73,7 +75,6 @@ public class PlayerDamage : MonoBehaviourPun
 
     private void damagePlayer(int viewID, float velMag)
     {
-        playerAnimator.SetBool("isHit", true);
         GameObject player = PhotonView.Find(viewID).gameObject;
         PlayerDamage playerDamage = player.GetComponent<PlayerDamage>();
 

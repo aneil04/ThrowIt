@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PlayerCarryMask
+  m_Mask: 00000000000000000000000000000000000000000100000001000000010000000100000000000000000000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 1
+  - m_Path: Armature/lowerBack
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/hip.L
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/hip.L/hip.L_end
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/hip.R
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/hip.R/hip.R_end
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/neck
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/neck/head
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/neck/head/head_end
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.L
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.L/upperArm.L
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.L/upperArm.L/lowerArm.L
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.L/upperArm.L/lowerArm.L/wrist.L
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.L/upperArm.L/lowerArm.L/wrist.L/upperFinger1.L
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.L/upperArm.L/lowerArm.L/wrist.L/upperFinger1.L/lowerFinger1.L
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.L/upperArm.L/lowerArm.L/wrist.L/upperFinger1.L/lowerFinger1.L/lowerFinger1.L_end
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.L/upperArm.L/lowerArm.L/wrist.L/upperFinger2.L
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.L/upperArm.L/lowerArm.L/wrist.L/upperFinger2.L/lowerFinger2.L
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.L/upperArm.L/lowerArm.L/wrist.L/upperFinger2.L/lowerFinger2.L/lowerFinger2.L_end
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.L/upperArm.L/lowerArm.L/wrist.L/upperFinger3.L
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.L/upperArm.L/lowerArm.L/wrist.L/upperFinger3.L/lowerFinger3.L
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.L/upperArm.L/lowerArm.L/wrist.L/upperFinger3.L/lowerFinger3.L/lowerFinger3.L_end
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.L/upperArm.L/lowerArm.L/wrist.L/upperThumb.L
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.L/upperArm.L/lowerArm.L/wrist.L/upperThumb.L/lowerThumb.L
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.L/upperArm.L/lowerArm.L/wrist.L/upperThumb.L/lowerThumb.L/lowerThumb.L_end
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.R
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.R/upperArm.R
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.R/upperArm.R/lowerArm.R
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.R/upperArm.R/lowerArm.R/wrist.R
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.R/upperArm.R/lowerArm.R/wrist.R/upperFinger1.R
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.R/upperArm.R/lowerArm.R/wrist.R/upperFinger1.R/lowerFinger1.R
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.R/upperArm.R/lowerArm.R/wrist.R/upperFinger1.R/lowerFinger1.R/lowerFinger1.R_end
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.R/upperArm.R/lowerArm.R/wrist.R/upperFinger2.R
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.R/upperArm.R/lowerArm.R/wrist.R/upperFinger2.R/lowerFinger2.R
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.R/upperArm.R/lowerArm.R/wrist.R/upperFinger2.R/lowerFinger2.R/lowerFinger2.R_end
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.R/upperArm.R/lowerArm.R/wrist.R/upperFinger3.R
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.R/upperArm.R/lowerArm.R/wrist.R/upperFinger3.R/lowerFinger3.R
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.R/upperArm.R/lowerArm.R/wrist.R/upperFinger3.R/lowerFinger3.R/lowerFinger3.R_end
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.R/upperArm.R/lowerArm.R/wrist.R/upperThumb.R
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.R/upperArm.R/lowerArm.R/wrist.R/upperThumb.R/lowerThumb.R
+    m_Weight: 1
+  - m_Path: Armature/lowerBack/upperBack/shoulder.R/upperArm.R/lowerArm.R/wrist.R/upperThumb.R/lowerThumb.R/lowerThumb.R_end
+    m_Weight: 1
+  - m_Path: Armature/upperLeg.L
+    m_Weight: 1
+  - m_Path: Armature/upperLeg.L/lowerLeg.L
+    m_Weight: 1
+  - m_Path: Armature/upperLeg.L/lowerLeg.L/foot.L
+    m_Weight: 1
+  - m_Path: Armature/upperLeg.L/lowerLeg.L/foot.L/foot.L_end
+    m_Weight: 1
+  - m_Path: Armature/upperLeg.R
+    m_Weight: 1
+  - m_Path: Armature/upperLeg.R/lowerLeg.R
+    m_Weight: 1
+  - m_Path: Armature/upperLeg.R/lowerLeg.R/foot.R
+    m_Weight: 1
+  - m_Path: Armature/upperLeg.R/lowerLeg.R/foot.R/foot.R_end
+    m_Weight: 1
+  - m_Path: Plane.001
+    m_Weight: 1

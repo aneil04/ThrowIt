@@ -38,12 +38,24 @@ public class Grab : MonoBehaviourPun
     }
     private void OnTriggerEnter(Collider col)
     {
-        this.currentCollisions.Add(col.gameObject);
+        if (col.gameObject.tag == "Grabable")
+        {
+            Outline outlineScript = col.gameObject.GetComponent<Outline>();
+            outlineScript.enabled = true;
+
+            this.currentCollisions.Add(col.gameObject);
+        }
     }
 
     private void OnTriggerExit(Collider col)
     {
-        this.currentCollisions.Remove(col.gameObject);
+        if (col.gameObject.tag == "Grabable")
+        {
+            Outline outlineScript = col.gameObject.GetComponent<Outline>();
+            outlineScript.enabled = false;
+
+            this.currentCollisions.Remove(col.gameObject);
+        }
     }
 
     //calls the grabObject method for all clients 
@@ -56,7 +68,7 @@ public class Grab : MonoBehaviourPun
         this.isGrabbing = true;
         this.currentGrab = this.currentCollisions[0].gameObject; //set the object grabbed to currentGrab
 
-        this.playerAnimator.SetBool("isCarry", true);
+        this.playerAnimator.SetBool("isCarrying", true);
 
         //raise event for all players including local client to grab the object
         object[] data = new object[] { this.currentGrab.GetPhotonView().ViewID, this.myPhotonView.ViewID }; //object array of data to send 
@@ -68,11 +80,15 @@ public class Grab : MonoBehaviourPun
     //calls the throwObject method for all clients 
     private void callThrow()
     {
+        //remove outline
+        Outline outlineScript = this.currentGrab.GetComponent<Outline>();
+        outlineScript.enabled = false;
+
         //remove parenting from grabbed object
         this.currentGrab.transform.SetParent(null);
         this.currentCollisions.Remove(this.currentGrab);
 
-        this.playerAnimator.SetBool("isCarry", false);
+        this.playerAnimator.SetBool("isCarrying", false);
 
         //raise event for all players including local client to throw the object
         object[] data = new object[] { this.currentGrab.GetPhotonView().ViewID, this.myPhotonView.ViewID };
@@ -85,7 +101,8 @@ public class Grab : MonoBehaviourPun
         grabCdTimer = grabCooldown;
     }
 
-    public void updateGrabInput() {
+    public void updateGrabInput()
+    {
         grabInputVal = 1;
     }
 

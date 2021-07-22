@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6119240502312560042}
   - component: {fileID: 8290880181968900448}
   - component: {fileID: 4350425486032126807}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PinkCornerInvFBX
   m_TagString: floor
   m_Icon: {fileID: 0}

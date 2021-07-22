@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 887664557845846035}
   - component: {fileID: 3149539511550864601}
   - component: {fileID: 6127947548864361146}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BlueCornerCurve
   m_TagString: floor
   m_Icon: {fileID: 0}

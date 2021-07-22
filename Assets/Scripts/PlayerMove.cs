@@ -6,50 +6,38 @@ using TMPro;
 
 public class PlayerMove : MonoBehaviour
 {
-    // public InputAction input;
     public Joystick joystick;
-    public bool inputType = true; //true if keyboard and mouse, false if joystick
     public Rigidbody rb;
     public float speed;
     public float turnSmoothTime = 0.1f;
     float turnSmoothVel;
     [SerializeField] private PhotonView pv;
     public Animator playerAnimator;
-
-    // void OnEnable()
-    // {
-    //     input.Enable();
-    // }
-
-    // void OnDisable()
-    // {
-    //     input.Disable();
-    // }
-
+    private bool isGrounded;
+    public float jumpForce;
+    public Transform raycastOrigin;
+    
     void FixedUpdate()
     {
         if (!pv.IsMine) { return; }
 
-        performMovement();
+        isGrounded = checkIfGrounded();
+        if (isGrounded && this.playerAnimator.GetBool("jump")) {
+            this.playerAnimator.SetBool("jump", false);
+        }
+
+        if (!this.playerAnimator.GetBool("isHit")) {
+            performMovement();
+        } 
     }
 
     void performMovement()
     {
-        // Vector2 inputVector = new Vector2(0, 0);
-        if (inputType)
-        {
-            // inputVector = input.ReadValue<Vector2>().normalized;
-        }
-        else
-        {
-            // inputVector = new Vector2(joystick.Horizontal, joystick.Vertical);
-        }
-
         Vector3 moveDir = new Vector3(joystick.Horizontal, 0, joystick.Vertical).normalized;
 
         if (moveDir.magnitude > 0.1f)
         {
-            playerAnimator.SetBool("isRun", true);
+            playerAnimator.SetBool("isRunning", true);
 
             float targetAngle = Mathf.Atan2(moveDir.x, moveDir.z) * Mathf.Rad2Deg;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVel, turnSmoothTime);
@@ -59,7 +47,22 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            playerAnimator.SetBool("isRun", false);
+            playerAnimator.SetBool("isRunning", false);
+        }
+    }
+
+    private bool checkIfGrounded () {
+        LayerMask mask = LayerMask.GetMask("floor");
+        return Physics.Raycast(raycastOrigin.position, Vector3.down, .3f, mask);
+    }
+
+    public void Jump () {
+        playerAnimator.SetBool("jump", true);
+
+        Debug.Log("wanted to jump");
+        if (this.isGrounded) {
+            Debug.Log("jumpd");
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
 }

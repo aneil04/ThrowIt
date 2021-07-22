@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 855780933526852791}
   - component: {fileID: 7016084784184096616}
   - component: {fileID: 8673308335130798297}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PinkCube
   m_TagString: floor
   m_Icon: {fileID: 0}

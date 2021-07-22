@@ -1,4 +1,4 @@
-﻿//
+//
 //  Outline.cs
 //  QuickOutline
 //
@@ -10,12 +10,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Photon.Pun;
 
 [DisallowMultipleComponent]
 
-public class Outline : MonoBehaviour
+public class NetOutline : MonoBehaviour
 {
     private static HashSet<Mesh> registeredMeshes = new HashSet<Mesh>();
+    public PhotonView photonView;
 
     public enum Mode
     {
@@ -65,7 +67,11 @@ public class Outline : MonoBehaviour
     [SerializeField]
     private Mode outlineMode;
 
-    public Color outlineColor;
+    public Color friendly;
+    public Color enemy;
+
+    [SerializeField]
+    private Color outlineColor;
 
     [SerializeField, Range(0f, 10f)]
     private float outlineWidth = 2f;
@@ -88,8 +94,22 @@ public class Outline : MonoBehaviour
 
     public bool needsUpdate;
 
+    private Color getOutlineColor()
+    {
+        if (photonView.IsMine)
+        {
+            return friendly;
+        }
+        else
+        {
+            return enemy;
+        }
+    }
+
     public void Awake()
     {
+        outlineColor = getOutlineColor();
+
         // Cache renderers
         renderers = GetComponentsInChildren<Renderer>();
 

@@ -153,7 +153,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameInput: {fileID: 363051732}
-  playerName: 
 --- !u!4 &187121655
 Transform:
   m_ObjectHideFlags: 0

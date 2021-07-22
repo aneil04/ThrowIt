@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2264712354239599527}
   - component: {fileID: 4073832051947808621}
   - component: {fileID: -5622263005929185611}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: OrangeCornerCurve
   m_TagString: floor
   m_Icon: {fileID: 0}

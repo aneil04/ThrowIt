@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1521187648693423595}
   - component: {fileID: 1521187648693423596}
   - component: {fileID: -8929790523613332635}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: YellowCube
   m_TagString: floor
   m_Icon: {fileID: 0}

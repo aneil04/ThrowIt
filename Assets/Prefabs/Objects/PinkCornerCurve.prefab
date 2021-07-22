@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6457300124003987134}
   - component: {fileID: 9113041584597178996}
   - component: {fileID: 7876646171948802520}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PinkCornerCurve
   m_TagString: floor
   m_Icon: {fileID: 0}

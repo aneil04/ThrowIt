@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4908698319213853585}
   - component: {fileID: 7204567897192828763}
   - component: {fileID: -225045460182838057}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GreenCornerInvFBX
   m_TagString: floor
   m_Icon: {fileID: 0}
