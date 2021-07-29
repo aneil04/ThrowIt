@@ -59,9 +59,7 @@ public class PlayerMove : MonoBehaviour
     public void Jump () {
         playerAnimator.SetBool("jump", true);
 
-        Debug.Log("wanted to jump");
         if (this.isGrounded) {
-            Debug.Log("jumpd");
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }

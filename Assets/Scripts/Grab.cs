@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
+using UnityEngine.UI;
 
 public class Grab : MonoBehaviourPun
 {
@@ -12,7 +13,9 @@ public class Grab : MonoBehaviourPun
     public GameObject grabPosObj;
     [SerializeField] private bool isGrabbing = false;
     public GameObject currentGrab;
-    public float strength;
+    private float strength = 10f;
+    public Slider slider;
+    public float maxStrength;
     public float grabCooldown = 1; //implemented so players don't spam grab and throw 
     private float grabCdTimer = 0;
     public const byte GRAB_OBJ_CODE = 1;
@@ -23,22 +26,21 @@ public class Grab : MonoBehaviourPun
     private void Start()
     {
         myPhotonView = GetComponentInParent<PhotonView>();
+        slider.maxValue = maxStrength;
     }
 
     private void OnEnable()
     {
-        // grabInput.Enable();
         PhotonNetwork.NetworkingClient.EventReceived += OnEvent;
     }
 
     private void OnDisable()
     {
-        // grabInput.Disable();
         PhotonNetwork.NetworkingClient.EventReceived -= OnEvent;
     }
     private void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Grabable")
+        if (col.gameObject.tag == "Grabable" && col.gameObject.GetComponent<Mass>().getMass() < this.strength)
         {
             Outline outlineScript = col.gameObject.GetComponent<Outline>();
             outlineScript.enabled = true;
@@ -49,7 +51,7 @@ public class Grab : MonoBehaviourPun
 
     private void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.tag == "Grabable")
+        if (col.gameObject.tag == "Grabable" && col.gameObject.GetComponent<Mass>().getMass() < this.strength)
         {
             Outline outlineScript = col.gameObject.GetComponent<Outline>();
             outlineScript.enabled = false;
@@ -63,12 +65,17 @@ public class Grab : MonoBehaviourPun
     {
         if (this.currentCollisions[0].gameObject.tag != "Grabable") { return; }
 
+        if (this.currentCollisions[0].gameObject.GetComponent<Mass>().getMass() > this.strength) { return; }
+
         //assign variables 
         this.grabCdTimer = grabCooldown; //reset timer
         this.isGrabbing = true;
         this.currentGrab = this.currentCollisions[0].gameObject; //set the object grabbed to currentGrab
+        this.strength += this.currentGrab.GetComponent<Mass>().getMass() / 2;
+        slider.value = this.strength;
 
-        this.playerAnimator.SetBool("isCarrying", true);
+        this.playerAnimator.SetBool("isCarrying", true); //play animation
+        this.playerAnimator.SetBool("throw", false); //play animation
 
         //raise event for all players including local client to grab the object
         object[] data = new object[] { this.currentGrab.GetPhotonView().ViewID, this.myPhotonView.ViewID }; //object array of data to send 
@@ -88,6 +95,7 @@ public class Grab : MonoBehaviourPun
         this.currentGrab.transform.SetParent(null);
         this.currentCollisions.Remove(this.currentGrab);
 
+        this.playerAnimator.SetBool("throw", true); //play animation
         this.playerAnimator.SetBool("isCarrying", false);
 
         //raise event for all players including local client to throw the object
@@ -110,6 +118,11 @@ public class Grab : MonoBehaviourPun
     {
         if (!myPhotonView.IsMine) { return; }
 
+        if (playerAnimator.GetBool("throw"))
+        {
+            this.playerAnimator.SetBool("throw", false);
+        }
+
         grabCdTimer -= Time.fixedDeltaTime;
         if (grabCdTimer < 0) { grabCdTimer = 0; }
 
@@ -125,6 +138,8 @@ public class Grab : MonoBehaviourPun
         {
             callThrow();
         }
+
+
 
         grabInputVal = 0;
     }
@@ -174,7 +189,10 @@ public class Grab : MonoBehaviourPun
         objPTV.enabled = true;
 
         //throw the object 
-        grabRigidbody.AddForce(grabPos.transform.forward * strength);
+        float min = 750;
+        float max = 1300;
+        float power = (this.strength * (max - min) / 250) + min;
+        grabRigidbody.AddForce(grabPos.transform.forward * power);
     }
 
     private void OnEvent(EventData photonEvent)

@@ -60,6 +60,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined room. Loading level...");
-        PhotonNetwork.LoadLevel("FirstMap");
+        PhotonNetwork.LoadLevel("EndlessMap");
     }
 }

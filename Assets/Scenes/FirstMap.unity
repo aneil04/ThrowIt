@@ -7081,6 +7081,23 @@ PrefabInstance:
       propertyPath: objDensity
       value: 0.02
       objectReference: {fileID: 0}
+    - target: {fileID: 4696327199041388950, guid: 3ca1cb90474fcbd4ebde365fb7c41635,
+        type: 3}
+      propertyPath: allObjects.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4696327199041388950, guid: 3ca1cb90474fcbd4ebde365fb7c41635,
+        type: 3}
+      propertyPath: allObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 362767803292157216, guid: 80bbb53e2dea93940aae86d0a0a2c96b,
+        type: 3}
+    - target: {fileID: 4696327199041388950, guid: 3ca1cb90474fcbd4ebde365fb7c41635,
+        type: 3}
+      propertyPath: allObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 362767803292157216, guid: 8f27ed0edade28e4fb97c9eef05c3e10,
+        type: 3}
     - target: {fileID: 4696327199041388951, guid: 3ca1cb90474fcbd4ebde365fb7c41635,
         type: 3}
       propertyPath: m_RootOrder

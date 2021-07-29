@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Testing.unity
     guid: d83bb7693831bc84e9a8195ced47eafb
+  - enabled: 1
+    path: Assets/Scenes/EndlessMap.unity
+    guid: 26a4a7de55b238849865bb5c32300edd
   m_configObjects: {}

@@ -16,9 +16,10 @@ GameObject:
   - component: {fileID: 7385654267713039217}
   - component: {fileID: 5377018500674695418}
   - component: {fileID: 1516521753044976866}
+  - component: {fileID: -2437175579311981590}
   - component: {fileID: 3970773735207992721}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: BigCube
   m_TagString: Grabable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,6 +170,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xBounds: {x: -7, y: 14}
   zBounds: {x: -14, y: 8}
+--- !u!114 &-2437175579311981590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362767803292157216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be31ec7d94299df4bb2e8079225a3a5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mass: 35
 --- !u!114 &3970773735207992721
 MonoBehaviour:
   m_ObjectHideFlags: 0
