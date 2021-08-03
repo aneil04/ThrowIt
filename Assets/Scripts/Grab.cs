@@ -21,8 +21,12 @@ public class Grab : MonoBehaviourPun
     public const byte GRAB_OBJ_CODE = 1;
     public const byte THROW_OBJ_CODE = 2;
     public Animator playerAnimator;
+    public Animator grabPosAnimator;
     private PhotonView myPhotonView;
     private float grabInputVal = 0;
+    private bool isThrowing = false;
+    public float throwDelay;
+    private float throwDelayTime = 0f;
     private void Start()
     {
         myPhotonView = GetComponentInParent<PhotonView>();
@@ -75,7 +79,8 @@ public class Grab : MonoBehaviourPun
         slider.value = this.strength;
 
         this.playerAnimator.SetBool("isCarrying", true); //play animation
-        this.playerAnimator.SetBool("throw", false); //play animation
+        this.playerAnimator.SetBool("throw", false);
+        this.grabPosAnimator.SetBool("throw", false);
 
         //raise event for all players including local client to grab the object
         object[] data = new object[] { this.currentGrab.GetPhotonView().ViewID, this.myPhotonView.ViewID }; //object array of data to send 
@@ -95,8 +100,8 @@ public class Grab : MonoBehaviourPun
         this.currentGrab.transform.SetParent(null);
         this.currentCollisions.Remove(this.currentGrab);
 
-        this.playerAnimator.SetBool("throw", true); //play animation
-        this.playerAnimator.SetBool("isCarrying", false);
+        // this.playerAnimator.SetBool("throw", true); //play animation
+        // this.playerAnimator.SetBool("isCarrying", false);
 
         //raise event for all players including local client to throw the object
         object[] data = new object[] { this.currentGrab.GetPhotonView().ViewID, this.myPhotonView.ViewID };
@@ -121,6 +126,7 @@ public class Grab : MonoBehaviourPun
         if (playerAnimator.GetBool("throw"))
         {
             this.playerAnimator.SetBool("throw", false);
+            this.grabPosAnimator.SetBool("throw", false);
         }
 
         grabCdTimer -= Time.fixedDeltaTime;
@@ -134,11 +140,24 @@ public class Grab : MonoBehaviourPun
             }
         }
 
-        if (grabInputVal == 1 && isGrabbing && grabCdTimer == 0)
+        throwDelayTime += Time.fixedDeltaTime;
+        if (grabInputVal == 1 && isGrabbing && grabCdTimer == 0 && isThrowing == false)
         {
-            callThrow();
+            isThrowing = true;
+            throwDelayTime = 0f;
+
+            this.playerAnimator.SetBool("throw", true); //play animation
+            this.playerAnimator.SetBool("isCarrying", false);
+            this.grabPosAnimator.SetBool("throw", true);
         }
 
+
+        if (throwDelayTime >= throwDelay && isThrowing)
+        {
+            isThrowing = false;
+            // this.playerAnimator.SetBool("throw", false);
+            callThrow();
+        }
 
 
         grabInputVal = 0;

@@ -956,6 +956,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 8148812305268547407}
   jumpForce: 500
   raycastOrigin: {fileID: 4958997248731168343}
+  jumpDelay: 0
 --- !u!114 &6965449100405735094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1041,6 +1042,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2839795210713064379}
+  - component: {fileID: 5027639613556503494}
   m_Layer: 0
   m_Name: Grab Pos
   m_TagString: Untagged
@@ -1062,6 +1064,25 @@ Transform:
   m_Father: {fileID: 2839795209959249788}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 1.163, y: 0, z: 0}
+--- !u!95 &5027639613556503494
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2839795210713064380}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1980b074dff61ef4087842e9d0683805, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2839795211641355995
 GameObject:
   m_ObjectHideFlags: 0
@@ -1113,6 +1134,8 @@ MonoBehaviour:
   maxStrength: 250
   grabCooldown: 0.7
   playerAnimator: {fileID: 8148812305268547407}
+  grabPosAnimator: {fileID: 5027639613556503494}
+  throwDelay: 0.45
 --- !u!135 &8374216190103056253
 SphereCollider:
   m_ObjectHideFlags: 0

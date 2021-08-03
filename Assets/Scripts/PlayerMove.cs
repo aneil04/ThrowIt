@@ -16,19 +16,25 @@ public class PlayerMove : MonoBehaviour
     private bool isGrounded;
     public float jumpForce;
     public Transform raycastOrigin;
-    
+    public float jumpDelay;
+    private float jumpDelayTime = 0f;
+    private bool isJumping = false;
     void FixedUpdate()
     {
         if (!pv.IsMine) { return; }
 
-        isGrounded = checkIfGrounded();
-        if (isGrounded && this.playerAnimator.GetBool("jump")) {
-            this.playerAnimator.SetBool("jump", false);
+        jumpDelayTime += Time.fixedDeltaTime;
+        if (isJumping && jumpDelayTime >= jumpDelay)
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            playerAnimator.SetBool("jump", false);
+            isJumping = false;
         }
 
-        if (!this.playerAnimator.GetBool("isHit")) {
+        if (!this.playerAnimator.GetBool("isHit"))
+        {
             performMovement();
-        } 
+        }
     }
 
     void performMovement()
@@ -51,16 +57,19 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    private bool checkIfGrounded () {
+    private bool checkIfGrounded()
+    {
         LayerMask mask = LayerMask.GetMask("floor");
         return Physics.Raycast(raycastOrigin.position, Vector3.down, .3f, mask);
     }
 
-    public void Jump () {
-        playerAnimator.SetBool("jump", true);
-
-        if (this.isGrounded) {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    public void Jump()
+    {
+        if (checkIfGrounded())
+        {
+            isJumping = true;
+            jumpDelayTime = 0;
+            playerAnimator.SetBool("jump", true);
         }
     }
 }
