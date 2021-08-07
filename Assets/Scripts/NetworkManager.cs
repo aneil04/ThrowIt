@@ -28,7 +28,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("Connected to server. Trying to join lobby...");
-        PhotonNetwork.JoinLobby();
+        PhotonNetwork.JoinRandomRoom();
+        // PhotonNetwork.JoinLobby();
     }
 
     //once joined in a lobby, join a random room
@@ -51,8 +52,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 4;
-        PhotonNetwork.CreateRoom(null, roomOptions, null);
+        //TODO: make a random string for the room name
+        PhotonNetwork.CreateRoom("bob", roomOptions, null);
         Debug.Log("Created room");
+        PhotonNetwork.JoinRoom("bob");
     }
 
     //load the game scene once joined in a room

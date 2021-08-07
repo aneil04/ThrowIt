@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1516521753044976866}
   - component: {fileID: -2437175579311981590}
   - component: {fileID: 3970773735207992721}
+  - component: {fileID: 6750877123302813973}
   m_Layer: 0
   m_Name: BigCube
   m_TagString: Grabable
@@ -163,7 +164,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 362767803292157216}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1857c7c017f8c64ba522d0d88bef0a8, type: 3}
   m_Name: 
@@ -228,3 +229,15 @@ MonoBehaviour:
     - {x: 0.57735026, y: 0.57735026, z: 0.57735026}
     - {x: 0.57735026, y: -0.57735026, z: 0.57735026}
   needsUpdate: 1
+--- !u!114 &6750877123302813973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362767803292157216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30a0455d80873eb488833e7ec58a5033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

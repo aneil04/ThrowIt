@@ -26,6 +26,8 @@ public class PlayerMaterial : MonoBehaviour
 
     void Start()
     {
+        if (!photonView.IsMine) { return; }
+
         int colorIndex = 0;
 
         colorIndex = (int)Random.Range(0, skinColors.Length);

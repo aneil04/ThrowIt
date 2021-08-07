@@ -7,20 +7,21 @@ public class CameraMove : MonoBehaviour
     private GameObject player;
     public float smoothSpeed = 10f;
     public Vector3 offset;
-    // Update is called once per frame
-    void LateUpdate()
+
+    void FixedUpdate()
     {
         if (player == null)
         {
-            Destroy(this.gameObject);
-            Debug.Log("destroyed camera");
+            return;
+        }
+
+        if (this.transform.parent != null) {
+            return;
         }
         
         Vector3 desiredPos = player.transform.position + offset;
         Vector3 smoothPos = Vector3.Lerp(this.transform.position, desiredPos, smoothSpeed * Time.deltaTime);
-
         this.transform.position = smoothPos;
-        this.transform.LookAt(player.transform);
     }
 
     public void SetPlayer(GameObject _player)

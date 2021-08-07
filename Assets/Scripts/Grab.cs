@@ -194,6 +194,11 @@ public class Grab : MonoBehaviourPun
         GameObject obj = PhotonView.Find(grabObjViewID).gameObject;
         Transform grabPos = PhotonView.Find(otherPlayerPV).gameObject.transform.Find("Grab Pos");
 
+        //set the ThrowInfo field
+        ThrowInfo info = obj.GetComponent<ThrowInfo>();
+        info.setSender(this.photonView.ViewID);
+        info.setIsThrowing(true);
+        
         //get rigidbody, collider, and photon transform view
         Rigidbody grabRigidbody = obj.GetComponent<Rigidbody>();
         BoxCollider grabCollider = obj.GetComponent<BoxCollider>();
