@@ -8,10 +8,9 @@ using UnityEngine.UI;
 
 public class PlayerDamage : MonoBehaviourPun
 {
+    public PlayerStats playerStats;
     public const byte TAKE_DAMAGE_CODE = 3;
     public const byte BROADCAST_KILL = 4;
-    [SerializeField] private float health;
-    public float maxHealth;
     public Slider slider;
     public PhotonView pv;
     public Animator playerAnimator;
@@ -19,9 +18,9 @@ public class PlayerDamage : MonoBehaviourPun
 
     void Start()
     {
-        this.health = maxHealth;
-        slider.maxValue = health;
-        slider.value = this.health;
+        playerStats.Health = playerStats.maxHealth;
+        slider.maxValue = playerStats.Health;
+        slider.value = playerStats.Health;
     }
 
     private void OnEnable()
@@ -36,13 +35,13 @@ public class PlayerDamage : MonoBehaviourPun
 
     public float getHealth()
     {
-        return this.health;
+        return playerStats.Health;
     }
 
     public void setHealth(float newHealth)
     {
-        this.health = newHealth;
-        slider.value = this.health;
+        playerStats.Health = newHealth;
+        slider.value = playerStats.Health;
     }
 
     void LateUpdate()
@@ -50,6 +49,10 @@ public class PlayerDamage : MonoBehaviourPun
         if (playerAnimator.GetBool("isHit") && this.rb.velocity.magnitude < .001f)
         {
             playerAnimator.SetBool("isHit", false);
+        }
+
+        if (slider.value != playerStats.Health) {
+            slider.value = playerStats.Health;
         }
     }
 
@@ -67,15 +70,15 @@ public class PlayerDamage : MonoBehaviourPun
 
                 //take damage
                 float damage = (objRB.velocity.magnitude * obj.GetComponent<Mass>().getMass()) / 3;
-                this.health -= damage;
-                slider.value = this.health;
+                playerStats.Health -= damage;
+                slider.value = playerStats.Health;
 
                 //raise event for all players including local client to damage the object
                 object[] data = new object[] { this.gameObject.GetPhotonView().ViewID, objRB.velocity.magnitude, obj.GetComponent<Mass>().getMass(), info.getSender() };
                 RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
                 PhotonNetwork.RaiseEvent(TAKE_DAMAGE_CODE, data, raiseEventOptions, SendOptions.SendReliable);
 
-                if (this.health <= 0)
+                if (playerStats.Health <= 0)
                 {
                     playerDeath();
                 }

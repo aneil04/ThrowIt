@@ -4,16 +4,21 @@ using UnityEngine;
 using Photon.Pun;
 public class ObjSpawner : MonoBehaviour
 {
-    public float interval;
-    public float currentTime;
-    public GameObject obj;
-    void Update()
-    {
-        currentTime += Time.deltaTime;
+    // public float interval;
+    // public float currentTime;
+    // public GameObject obj;
+    public GameObject test;
 
-        if (currentTime >= interval) {
-            currentTime = 0;
-            PhotonNetwork.Instantiate(obj.name, this.transform.position, this.transform.rotation, 0);
-        }
+    void Start() {
+        PhotonNetwork.Instantiate(test.name, this.transform.position, this.transform.rotation, 0);
     }
+    // void Update()
+    // {
+    //     currentTime += Time.deltaTime;
+
+    //     if (currentTime >= interval) {
+    //         currentTime = 0;
+    //         // PhotonNetwork.Instantiate(obj.name, this.transform.position, this.transform.rotation, 0);
+    //     }
+    // }
 }

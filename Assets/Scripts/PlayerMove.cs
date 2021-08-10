@@ -6,9 +6,9 @@ using TMPro;
 
 public class PlayerMove : MonoBehaviour
 {
+    public PlayerStats playerStats;
     public Joystick joystick;
     public Rigidbody rb;
-    public float speed;
     public float turnSmoothTime = 0.1f;
     float turnSmoothVel;
     [SerializeField] private PhotonView pv;
@@ -49,7 +49,7 @@ public class PlayerMove : MonoBehaviour
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVel, turnSmoothTime);
 
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            rb.MovePosition(transform.position + moveDir * Time.deltaTime * speed);
+            rb.MovePosition(transform.position + moveDir * Time.deltaTime * playerStats.MoveSpeed);
         }
         else
         {

@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class Grab : MonoBehaviourPun
 {
+    public PlayerStats playerStats;
     List<GameObject> currentCollisions = new List<GameObject>();
     // public InputAction grabInput;
     public GameObject grabPosObj;
@@ -44,7 +45,7 @@ public class Grab : MonoBehaviourPun
     }
     private void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Grabable" && col.gameObject.GetComponent<Mass>().getMass() < this.strength)
+        if (col.gameObject.tag == "Grabable" && col.gameObject.GetComponent<Mass>().getMass() < playerStats.Strength)
         {
             Outline outlineScript = col.gameObject.GetComponent<Outline>();
             outlineScript.enabled = true;
@@ -55,7 +56,7 @@ public class Grab : MonoBehaviourPun
 
     private void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.tag == "Grabable" && col.gameObject.GetComponent<Mass>().getMass() < this.strength)
+        if (col.gameObject.tag == "Grabable" && col.gameObject.GetComponent<Mass>().getMass() < playerStats.Strength)
         {
             Outline outlineScript = col.gameObject.GetComponent<Outline>();
             outlineScript.enabled = false;
@@ -69,14 +70,14 @@ public class Grab : MonoBehaviourPun
     {
         if (this.currentCollisions[0].gameObject.tag != "Grabable") { return; }
 
-        if (this.currentCollisions[0].gameObject.GetComponent<Mass>().getMass() > this.strength) { return; }
+        if (this.currentCollisions[0].gameObject.GetComponent<Mass>().getMass() > playerStats.Strength) { return; }
 
         //assign variables 
         this.grabCdTimer = grabCooldown; //reset timer
         this.isGrabbing = true;
         this.currentGrab = this.currentCollisions[0].gameObject; //set the object grabbed to currentGrab
-        this.strength += this.currentGrab.GetComponent<Mass>().getMass() / 2;
-        slider.value = this.strength;
+        playerStats.Strength += this.currentGrab.GetComponent<Mass>().getMass() / 2;
+        slider.value = playerStats.Strength;
 
         this.playerAnimator.SetBool("isCarrying", true); //play animation
         this.playerAnimator.SetBool("throw", false);
@@ -122,6 +123,8 @@ public class Grab : MonoBehaviourPun
     void FixedUpdate()
     {
         if (!myPhotonView.IsMine) { return; }
+
+        this.slider.value = playerStats.Strength;
 
         if (playerAnimator.GetBool("throw"))
         {
@@ -192,7 +195,8 @@ public class Grab : MonoBehaviourPun
     {
         //find gameobject of the object that is grabbed and transform of the grab position 
         GameObject obj = PhotonView.Find(grabObjViewID).gameObject;
-        Transform grabPos = PhotonView.Find(otherPlayerPV).gameObject.transform.Find("Grab Pos");
+        GameObject otherPlayer = PhotonView.Find(otherPlayerPV).gameObject;
+        Transform grabPos = otherPlayer.transform.Find("Grab Pos");
 
         //set the ThrowInfo field
         ThrowInfo info = obj.GetComponent<ThrowInfo>();
@@ -203,7 +207,9 @@ public class Grab : MonoBehaviourPun
         Rigidbody grabRigidbody = obj.GetComponent<Rigidbody>();
         BoxCollider grabCollider = obj.GetComponent<BoxCollider>();
         PhotonTransformView objPTV = obj.GetComponent<PhotonTransformView>();
-
+        
+        PlayerStats stats = otherPlayer.GetComponent<PlayerStats>();
+        
         //clear parenting
         obj.transform.SetParent(null);
 
@@ -215,7 +221,7 @@ public class Grab : MonoBehaviourPun
         //throw the object 
         float min = 750;
         float max = 1300;
-        float power = (this.strength * (max - min) / 250) + min;
+        float power = (stats.Strength * (max - min) / 250) + min;
         grabRigidbody.AddForce(grabPos.transform.forward * power);
     }
 
