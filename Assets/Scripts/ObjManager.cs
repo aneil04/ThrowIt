@@ -13,7 +13,11 @@ public class ObjManager : MonoBehaviour
     public float objDensity; //how many objects per unit to spawn at the beginning of the game
     public float totalNumOfObjects; //how many objects in the entire scene 
     private PhotonView photonView;
-    
+
+    public GameObject powerupPrefab;
+    public float powerupSpawnTime;
+    private float spawnTime;
+
     void Start()
     {
         photonView = GetComponent<PhotonView>();
@@ -37,14 +41,17 @@ public class ObjManager : MonoBehaviour
         }
     }
 
-    public void SpawnRandomObject()
+    void Update() {
+        if (spawnTime >= powerupSpawnTime) {
+            spawnTime = 0;
+            SpawnPowerup();
+        }
+        spawnTime += Time.fixedDeltaTime;
+    }
+
+    public void SpawnPowerup()
     {
-        GameObject objToSpawn = allObjects[(int)Random.Range(0, allObjects.Count)];
-        objectsInScene.Add(objToSpawn);
-
-        objToSpawn.GetComponent<Rigidbody>().velocity = Vector3.zero;
-
-        Vector3 spawnPos = new Vector3(Random.Range(xBounds.x, xBounds.y), yHeight, Random.Range(zBounds.x, zBounds.y));
-        PhotonNetwork.InstantiateRoomObject(objToSpawn.name, spawnPos, Quaternion.identity);
+        Vector3 spawnPos = new Vector3(Random.Range(xBounds.x, xBounds.y), 30, Random.Range(zBounds.x, zBounds.y));
+        PhotonNetwork.InstantiateRoomObject(powerupPrefab.name, spawnPos, Quaternion.identity);
     }
 }

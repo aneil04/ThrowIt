@@ -8,6 +8,7 @@ public class PlayerStats : MonoBehaviour
     private float health = 100f;
     private float strength = 10f;
     private float moveSpeed = 8f;
+    private float jumpForce = 100f;
 
     public float Health
     {
@@ -25,12 +26,13 @@ public class PlayerStats : MonoBehaviour
     {
         get { return this.moveSpeed; }
         set { this.moveSpeed = value; }
-    }
+    }   
 
     //powerup stuff here
     public float powerupTime;
     public float strengthPowerupIncrease;
     public float moveSpeedPowerupIncrease;
+    public float jumpForcePowerupIncrease;
     public float healthRegenInterval;
     public float healthRegenAmount;
 
@@ -65,5 +67,11 @@ public class PlayerStats : MonoBehaviour
         //spawn sheild
         yield return new WaitForSeconds(powerupTime);
         //despawn shield
+    }
+
+    IEnumerator JumpBoost() {
+        this.jumpForce += jumpForcePowerupIncrease;
+        yield return new WaitForSeconds(powerupTime);
+        this.jumpForce -= jumpForcePowerupIncrease;
     }
 }

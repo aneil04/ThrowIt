@@ -16,8 +16,15 @@ public class PlayerDamage : MonoBehaviourPun
     public Animator playerAnimator;
     public Rigidbody rb;
 
+    public GameObject gameUI;
+    public GameObject deathScreenUI;
+    private bool isDead;
+
     void Start()
     {
+        gameUI.SetActive(true);
+        deathScreenUI.SetActive(false);
+
         playerStats.Health = playerStats.maxHealth;
         slider.maxValue = playerStats.Health;
         slider.value = playerStats.Health;
@@ -51,9 +58,18 @@ public class PlayerDamage : MonoBehaviourPun
             playerAnimator.SetBool("isHit", false);
         }
 
-        if (slider.value != playerStats.Health) {
+        if (slider.value != playerStats.Health)
+        {
             slider.value = playerStats.Health;
         }
+
+        if (playerStats.Health <= 0 && !isDead)
+        {
+            isDead = true;
+            displayPlayerInfo();
+        }
+
+        // playerStats.Health -= 0.1f;
     }
 
     void OnCollisionEnter(Collision col)
@@ -64,7 +80,7 @@ public class PlayerDamage : MonoBehaviourPun
             Rigidbody objRB = obj.GetComponent<Rigidbody>();
             ThrowInfo info = obj.GetComponent<ThrowInfo>();
 
-            if (info.getIsThrowing())
+            if (info.getIsThrowing() && info.getSender() != this.pv.ViewID)
             {
                 this.playerAnimator.SetBool("isHit", true);
 
@@ -78,12 +94,20 @@ public class PlayerDamage : MonoBehaviourPun
                 RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
                 PhotonNetwork.RaiseEvent(TAKE_DAMAGE_CODE, data, raiseEventOptions, SendOptions.SendReliable);
 
-                if (playerStats.Health <= 0)
+                if (playerStats.Health <= 0 && !isDead)
                 {
-                    playerDeath();
+                    isDead = true;
+                    displayPlayerInfo();
                 }
             }
         }
+    }
+
+    public void displayPlayerInfo()
+    {
+        Debug.Log("Time alive: " + Time.timeSinceLevelLoad + " seconds");
+        gameUI.SetActive(false);
+        deathScreenUI.SetActive(true);
     }
 
     public void playerDeath()

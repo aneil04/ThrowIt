@@ -28,6 +28,8 @@ public class Grab : MonoBehaviourPun
     private bool isThrowing = false;
     public float throwDelay;
     private float throwDelayTime = 0f;
+    public Transform aimAssistTarget; //make this private with get; and set;
+
     private void Start()
     {
         myPhotonView = GetComponentInParent<PhotonView>();
@@ -76,6 +78,7 @@ public class Grab : MonoBehaviourPun
         this.grabCdTimer = grabCooldown; //reset timer
         this.isGrabbing = true;
         this.currentGrab = this.currentCollisions[0].gameObject; //set the object grabbed to currentGrab
+
         playerStats.Strength += this.currentGrab.GetComponent<Mass>().getMass() / 2;
         slider.value = playerStats.Strength;
 
@@ -93,6 +96,11 @@ public class Grab : MonoBehaviourPun
     //calls the throwObject method for all clients 
     private void callThrow()
     {
+        if (aimAssistTarget != null)
+        {
+            grabPosObj.transform.LookAt(aimAssistTarget);
+        }
+
         //remove outline
         Outline outlineScript = this.currentGrab.GetComponent<Outline>();
         outlineScript.enabled = false;
@@ -105,7 +113,7 @@ public class Grab : MonoBehaviourPun
         // this.playerAnimator.SetBool("isCarrying", false);
 
         //raise event for all players including local client to throw the object
-        object[] data = new object[] { this.currentGrab.GetPhotonView().ViewID, this.myPhotonView.ViewID };
+        object[] data = new object[] { this.currentGrab.GetPhotonView().ViewID, this.myPhotonView.ViewID, grabPosObj.transform.eulerAngles };
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
         PhotonNetwork.RaiseEvent(THROW_OBJ_CODE, data, raiseEventOptions, SendOptions.SendReliable);
 
@@ -118,6 +126,11 @@ public class Grab : MonoBehaviourPun
     public void updateGrabInput()
     {
         grabInputVal = 1;
+    }
+
+    void Update()
+    {
+        aimAssistTarget = null; //maybe change this so its a bit more performance effieict 
     }
 
     void FixedUpdate()
@@ -177,6 +190,11 @@ public class Grab : MonoBehaviourPun
         BoxCollider grabCollider = obj.GetComponent<BoxCollider>();
         PhotonTransformView objPTV = obj.GetComponent<PhotonTransformView>();
 
+        //set the ThrowInfo field
+        ThrowInfo info = obj.GetComponent<ThrowInfo>();
+        info.setSender(this.photonView.ViewID);
+        info.setIsThrowing(true);
+
         //disable rigidbody, collider, and photon transform view
         grabRigidbody.isKinematic = true;
         grabCollider.enabled = false;
@@ -191,25 +209,22 @@ public class Grab : MonoBehaviourPun
     }
 
     //TODO: make sure to throw the object with the specific players strenght
-    private void throwObject(int grabObjViewID, int otherPlayerPV)
+    private void throwObject(int grabObjViewID, int otherPlayerPV, Vector3 euler)
     {
         //find gameobject of the object that is grabbed and transform of the grab position 
         GameObject obj = PhotonView.Find(grabObjViewID).gameObject;
         GameObject otherPlayer = PhotonView.Find(otherPlayerPV).gameObject;
         Transform grabPos = otherPlayer.transform.Find("Grab Pos");
 
-        //set the ThrowInfo field
-        ThrowInfo info = obj.GetComponent<ThrowInfo>();
-        info.setSender(this.photonView.ViewID);
-        info.setIsThrowing(true);
-        
+        grabPos.rotation = Quaternion.Euler(euler);
+
         //get rigidbody, collider, and photon transform view
         Rigidbody grabRigidbody = obj.GetComponent<Rigidbody>();
         BoxCollider grabCollider = obj.GetComponent<BoxCollider>();
         PhotonTransformView objPTV = obj.GetComponent<PhotonTransformView>();
-        
+
         PlayerStats stats = otherPlayer.GetComponent<PlayerStats>();
-        
+
         //clear parenting
         obj.transform.SetParent(null);
 
@@ -237,7 +252,7 @@ public class Grab : MonoBehaviourPun
         else if (eventCode == THROW_OBJ_CODE) //throw the object 
         {
             object[] data = (object[])photonEvent.CustomData;
-            throwObject((int)data[0], (int)data[1]);
+            throwObject((int)data[0], (int)data[1], (Vector3)data[2]);
         }
     }
 }

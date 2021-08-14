@@ -19,6 +19,10 @@ public class PlayerMove : MonoBehaviour
     public float jumpDelay;
     private float jumpDelayTime = 0f;
     private bool isJumping = false;
+    public Transform jumpParticlesPos;
+    public GameObject jumpParticles;
+
+
     void FixedUpdate()
     {
         if (!pv.IsMine) { return; }
@@ -70,6 +74,8 @@ public class PlayerMove : MonoBehaviour
             isJumping = true;
             jumpDelayTime = 0;
             playerAnimator.SetBool("jump", true);
+
+            PhotonNetwork.Instantiate(jumpParticles.name, jumpParticlesPos.position, jumpParticlesPos.rotation, 0);
         }
     }
 }

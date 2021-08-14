@@ -22,7 +22,7 @@ public class RespawnObjects : MonoBehaviour
         if(!photonView.IsMine) {return;}
 
         if (this.transform.position.y < -10) {
-            objManagerScript.SpawnRandomObject();
+            // objManagerScript.SpawnRandomObject();
             PhotonNetwork.Destroy(this.GetComponent<PhotonView>());
         }
     }
