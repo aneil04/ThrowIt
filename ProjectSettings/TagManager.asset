@@ -7,6 +7,7 @@ TagManager:
   - floor
   - Grabable
   - Persist
+  - ObjManager
   layers:
   - Default
   - TransparentFX

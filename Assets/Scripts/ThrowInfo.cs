@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class ThrowInfo : MonoBehaviour
+using Photon.Pun;
+public class ThrowInfo : MonoBehaviourPun
 {
     private int senderPV; //the person who threw the object
     private bool isThrowing;
@@ -22,10 +22,11 @@ public class ThrowInfo : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (this.senderPV != -1 && this.rb.velocity.magnitude < 1)
         {
+            Debug.Log("got in here");
             this.senderPV = -1;
             isThrowing = false;
         }

@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 866ef8bde8d4e23448924af1d71c28e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameInput: {fileID: 363051732}
 --- !u!4 &187121655
 Transform:
   m_ObjectHideFlags: 0
@@ -179,6 +178,7 @@ GameObject:
   - component: {fileID: 363051734}
   - component: {fileID: 363051733}
   - component: {fileID: 363051732}
+  - component: {fileID: 363051735}
   m_Layer: 5
   m_Name: InputField (TMP)
   m_TagString: Untagged
@@ -285,7 +285,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 363051735}
+        m_TargetAssemblyTypeName: PlayerName, Assembly-CSharp
+        m_MethodName: SetPlayerName
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -342,6 +354,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 363051730}
   m_CullTransparentMesh: 1
+--- !u!114 &363051735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363051730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 866ef8bde8d4e23448924af1d71c28e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &392340545
 GameObject:
   m_ObjectHideFlags: 0
@@ -1453,6 +1477,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5646224367204530165, guid: 7a485598f5bc3c340aa235c9ae04d1e3, type: 3}
+      propertyPath: nameInput
+      value: 
+      objectReference: {fileID: 824012295}
     - target: {fileID: 5646224367204530165, guid: 7a485598f5bc3c340aa235c9ae04d1e3, type: 3}
       propertyPath: playerName
       value: 

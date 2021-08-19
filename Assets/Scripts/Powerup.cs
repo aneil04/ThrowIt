@@ -17,9 +17,12 @@ public class Powerup : MonoBehaviour
 
     private float elapsedTime = 0;
 
+    ObjManager objManager;
+
     void Start()
     {
         type = powerups[(int)Random.Range(0, powerups.Count)];
+        objManager = GameObject.FindGameObjectWithTag("ObjManager").GetComponent<ObjManager>();
     }
 
     void Update()
@@ -84,6 +87,7 @@ public class Powerup : MonoBehaviour
             playerStats.StartCoroutine("IncreaseMoveSpeed");
         }
 
+        objManager.decrementNumOfPowerup();
         PhotonNetwork.Destroy(this.photonView);
     }
 }

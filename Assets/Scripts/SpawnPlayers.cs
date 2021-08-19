@@ -17,14 +17,14 @@ public class SpawnPlayers : MonoBehaviour
         //spawn the player
         Vector3 spawnPos = new Vector3(Random.Range(xBounds.x, xBounds.y), yHeight, Random.Range(zBounds.x, zBounds.y));
 
-        string playerName = getPlayerName();
+        // string playerName = getPlayerName();
 
-        object[] customPlayerData = { playerName };
+        object[] customPlayerData = {  };
         PhotonNetwork.Instantiate("Player", spawnPos, Quaternion.identity, 0, customPlayerData);
     }
-    public string getPlayerName()
-    {
-        string name = GameObject.FindGameObjectsWithTag("Persist")[0].GetComponent<PlayerName>().getName();
-        return name;
-    }
+    // public string getPlayerName()
+    // {
+    //     // string name = GameObject.FindGameObjectsWithTag("Persist")[0].GetComponent<PlayerName>().getName();
+    //     // return name;
+    // }
 }

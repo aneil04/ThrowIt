@@ -4,24 +4,15 @@ using UnityEngine;
 using TMPro;
 using Photon.Pun;
 
-public class SetPlayerName : MonoBehaviour, IPunInstantiateMagicCallback
+public class SetPlayerName : MonoBehaviour
 {
     public TextMeshProUGUI playerNameUI;
 
-    public void OnPhotonInstantiate(PhotonMessageInfo info)
-    {
-        object[] instantiationData = info.photonView.InstantiationData;
-
-        playerNameUI.text = (string) instantiationData[0];
-        this.name = (string) instantiationData[0];
-    }
-
     void Update()
     {
-        if (this.name.Contains("(Clone)"))
+        if (playerNameUI.text != (string)PhotonNetwork.NickName)
         {
-            this.name = this.name.Substring(0, this.name.IndexOf("(Clone)"));
-            playerNameUI.text = this.name;
+            playerNameUI.text = (string)PhotonNetwork.NickName;
         }
     }
 }

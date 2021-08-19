@@ -38,11 +38,17 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
-  - grabObject
-  - throwObject
   - SetName
   - setPlayerColor
   - SetPlayerColor
+  - UpdateHealth
+  - UpdateStrength
+  - DamagePlayer
+  - SyncHealth
+  - UpdateOwner
+  - GrabObject
+  - ThrowObject
+  - Bob
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

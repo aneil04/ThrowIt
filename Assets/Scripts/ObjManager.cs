@@ -2,56 +2,91 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
-public class ObjManager : MonoBehaviour
+public class ObjManager : MonoBehaviour, IPunOwnershipCallbacks
 {
     public List<GameObject> allObjects = new List<GameObject>();
-    public List<GameObject> objectsInScene = new List<GameObject>();
     public Vector2 xBounds;
     public Vector2 zBounds;
     public float yHeight;
-    public float objDensity; //how many objects per unit to spawn at the beginning of the game
-    public float totalNumOfObjects; //how many objects in the entire scene 
+    public float objDensity; 
+    float totalNumOfObjects; 
     private PhotonView photonView;
+
+    private int numOfPowerups = 0;
+    private int numOfObjects = 0;
+    float area;
 
     public GameObject powerupPrefab;
     public float powerupSpawnTime;
     private float spawnTime;
+    public float powerupDensity;
+    float totalNumOfPowerups;
 
     void Start()
     {
         photonView = GetComponent<PhotonView>();
-        if (!photonView.IsMine)
-        {
-            return;
-        }
 
-        float area = Mathf.Abs(xBounds.y - xBounds.x) * Mathf.Abs(zBounds.y - zBounds.x);
+        area = Mathf.Abs(xBounds.y - xBounds.x) * Mathf.Abs(zBounds.y - zBounds.x);
         totalNumOfObjects = objDensity * area;
+        totalNumOfPowerups = powerupDensity * area;
 
-        for (int x = 0; x < totalNumOfObjects; x++)
+        while (this.numOfObjects <= totalNumOfObjects)
         {
-            GameObject objToSpawn = allObjects[(int)Random.Range(0, allObjects.Count)];
-            objectsInScene.Add(objToSpawn);
+            spawnObj();
+        }
 
-            objToSpawn.GetComponent<Rigidbody>().velocity = Vector3.zero;
-
-            Vector3 spawnPos = new Vector3(Random.Range(xBounds.x, xBounds.y), yHeight, Random.Range(zBounds.x, zBounds.y));
-            PhotonNetwork.InstantiateRoomObject(objToSpawn.name, spawnPos, Quaternion.identity);
+        while (this.numOfPowerups <= totalNumOfPowerups)
+        {
+            spawnPowerup();
         }
     }
 
-    void Update() {
-        if (spawnTime >= powerupSpawnTime) {
-            spawnTime = 0;
-            SpawnPowerup();
+    void Update()
+    {
+        if (this.numOfPowerups < totalNumOfPowerups)
+        {
+            while (this.numOfPowerups <= totalNumOfPowerups)
+            {
+                spawnPowerup();
+            }
         }
-        spawnTime += Time.fixedDeltaTime;
     }
 
-    public void SpawnPowerup()
+    void spawnObj()
+    {
+        GameObject objToSpawn = allObjects[(int)Random.Range(0, allObjects.Count)];
+        Vector3 spawnPos = new Vector3(Random.Range(xBounds.x, xBounds.y), yHeight, Random.Range(zBounds.x, zBounds.y));
+        PhotonNetwork.InstantiateRoomObject(objToSpawn.name, spawnPos, Quaternion.identity);
+        this.numOfObjects++;
+    }
+
+    void spawnPowerup()
     {
         Vector3 spawnPos = new Vector3(Random.Range(xBounds.x, xBounds.y), 30, Random.Range(zBounds.x, zBounds.y));
         PhotonNetwork.InstantiateRoomObject(powerupPrefab.name, spawnPos, Quaternion.identity);
+        this.numOfPowerups++;
+    }
+
+    public void decrementNumOfPowerup()
+    {
+        this.numOfPowerups--;
+    }
+
+    public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
+    {
+        Debug.Log("ownership requested");
+        // throw new System.NotImplementedException();
+    }
+
+    public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnOwnershipTransferFailed(PhotonView targetView, Player senderOfFailedRequest)
+    {
+        throw new System.NotImplementedException();
     }
 }
