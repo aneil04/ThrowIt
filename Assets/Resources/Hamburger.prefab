@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: -4124719193606431573}
   - component: {fileID: 3970773735207992721}
   - component: {fileID: -8460403015638398268}
+  - component: {fileID: 5649994547613710843}
+  - component: {fileID: 454241504610312843}
   m_Layer: 0
   m_Name: Hamburger
   m_TagString: Grabable
@@ -192,6 +194,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwReset: 0
+--- !u!114 &5649994547613710843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362767803292157216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b72945c5ce7f6294cb2520cb5070b2de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  power: 40
+--- !u!114 &454241504610312843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362767803292157216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c193f528e9cd34f8bf667af3b3643a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objMass: {fileID: 0}
+  rb: {fileID: 0}
+  info: {fileID: 0}
 --- !u!1 &3301060281202418224
 GameObject:
   m_ObjectHideFlags: 0

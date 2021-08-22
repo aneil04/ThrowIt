@@ -7,7 +7,7 @@ public class ObjOwner : MonoBehaviourPun
 {
     private int ownerViewId = -1;
     private Transform ownerGrabPos;
-    public float throwDelay;
+    private float throwDelay = 0.5f;
     private Rigidbody rigidbody;
 
     public float power = 40;

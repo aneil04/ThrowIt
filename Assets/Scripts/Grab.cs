@@ -28,6 +28,9 @@ public class Grab : MonoBehaviourPun
 
     public Transform aimAssistTarget; //make this private with get; and set;
 
+    public GameObject grabBtn;
+    public GameObject throwbtn;
+
     private void OnEnable()
     {
         PhotonNetwork.NetworkingClient.EventReceived += OnEvent;
@@ -130,6 +133,17 @@ public class Grab : MonoBehaviourPun
         {
             this.playerAnimator.SetBool("throw", false);
             this.grabPosAnimator.SetBool("throw", false);
+        }
+
+        if (isGrabbing)
+        {
+            grabBtn.SetActive(false);
+            throwbtn.SetActive(true);
+        }
+        else
+        {
+            grabBtn.SetActive(true);
+            throwbtn.SetActive(false);
         }
     }
     private void OnEvent(EventData photonEvent)
