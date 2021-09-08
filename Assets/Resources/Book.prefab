@@ -194,6 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwReset: 0
+  trailPrefab: {fileID: 1356411030657244532, guid: 8982cdcbd6679e54eacbc4b490fad403, type: 3}
 --- !u!114 &-8015628546790884376
 MonoBehaviour:
   m_ObjectHideFlags: 0

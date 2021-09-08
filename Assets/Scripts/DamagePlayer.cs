@@ -15,7 +15,6 @@ public class DamagePlayer : MonoBehaviour
         info = GetComponent<ThrowInfo>();
     }
 
-    //TODO: when the object collides with the player, set isThrowing in throwInfo to false immediately 
     //TODO: unfreeze the position of the player when collided with an object 
     void OnCollisionEnter(Collision col)
     {
@@ -26,10 +25,10 @@ public class DamagePlayer : MonoBehaviour
         if (!info.getIsThrowing() || info.getSender() == playerToDamage.GetComponent<PhotonView>().ViewID) { return; }
 
         PlayerDamage playerDamage = playerToDamage.GetComponent<PlayerDamage>();
-
         float damageAmount = 20;
         // rb.velocity.magnitude * objMass.getMass() / 3;
-    
-        playerDamage.damagePlayer(damageAmount);
+        playerDamage.damagePlayer(damageAmount, PhotonView.Find(info.getSender()).Owner.NickName);
+
+        info.setIsThrowing(false);
     }
 }

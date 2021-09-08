@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
-public class PlayerDamage : MonoBehaviourPun
+public class PlayerDamage : MonoBehaviourPunCallbacks
 {
     public PlayerStats playerStats;
     public Animator playerAnimator;
@@ -19,14 +20,21 @@ public class PlayerDamage : MonoBehaviourPun
         deathScreenUI.SetActive(false);
     }
 
-    // void LateUpdate()
-    // {
-    //     if (!photonView.IsMine) { return; }
-    // }
-
-    public void displayPlayerInfo()
+    public void damagePlayer(float amount, string playerName)
     {
-        Debug.Log("Time alive: " + Time.timeSinceLevelLoad + " seconds");
+        float newHealth = this.playerStats.Health - amount;
+        this.playerStats.Health = newHealth;
+
+        if (playerStats.Health <= 0 && !isDead)
+        {
+            isDead = true;
+            displayPlayerInfo(playerName);
+        }
+    }
+
+    public void displayPlayerInfo(string killedBy)
+    {
+        Debug.Log("Killed by: " + killedBy);
         gameUI.SetActive(false);
         deathScreenUI.SetActive(true);
     }
@@ -38,23 +46,11 @@ public class PlayerDamage : MonoBehaviourPun
 
     public void playerDeath()
     {
-        // GameObject.FindGameObjectsWithTag("Persist")[0].GetComponent<PlayerName>().DestroyThis();
-
-        PhotonNetwork.Disconnect();
-        PhotonNetwork.LoadLevel("DeathScreen");
-        PhotonNetwork.Destroy(this.photonView);
+        PhotonNetwork.LeaveRoom();
     }
 
-    public void damagePlayer(float amount)
+    public override void OnLeftRoom()
     {
-        // if (!base.photonView.IsMine) { return; }
-        float newHealth = this.playerStats.Health - amount;
-        this.playerStats.Health = newHealth;
-
-        if (playerStats.Health <= 0 && !isDead)
-        {
-            isDead = true;
-            displayPlayerInfo();
-        }
+        SceneManager.LoadScene("MainMenu");
     }
 }

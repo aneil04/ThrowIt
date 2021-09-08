@@ -12,11 +12,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public TextMeshProUGUI nameInput;
     private bool isConnecting;
 
-    //connect to the master server
     public void connectToServer()
     {
-        // playerName.FindInput();
-
         if (PhotonNetwork.IsConnected)
         {
             PhotonNetwork.JoinRandomRoom();
@@ -28,7 +25,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
-    //once connected to master, join a lobby
     public override void OnConnectedToMaster()
     {
         Debug.Log("Connected to master");
@@ -38,18 +34,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             PhotonNetwork.JoinRandomRoom();
             isConnecting = false;
         }
-        // PhotonNetwork.JoinRandomRoom();
-        // PhotonNetwork.JoinLobby();
     }
-
-    // //once joined in a lobby, join a random room
-    // public override void OnJoinedLobby()
-    // {
-    //     Debug.Log("Joined lobby. Trying to join room...");
-    //     // PhotonNetwork.JoinRandomRoom();
-    // }
-
-    //if the join random room failed, then create a new room and join it
+    
     //TODO: make sure to check that the error was because there were no availble rooms 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {

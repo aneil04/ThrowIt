@@ -21,6 +21,8 @@ public class PlayerStats : MonoBehaviour, IPunObservable
     private float moveSpeed = 8f;
     private float jumpForce = 100f;
 
+    private bool isUsingPowerup;
+
     void Start()
     {
         // if (!photonView.IsMine) { return; }
@@ -31,6 +33,8 @@ public class PlayerStats : MonoBehaviour, IPunObservable
         Health = initialHealth;
         Strength = initialStrength;
     }
+
+    #region PlayerFeilds
 
     public float Health
     {
@@ -51,14 +55,60 @@ public class PlayerStats : MonoBehaviour, IPunObservable
             strengthSlider.value = this.strength;
         }
     }
-
     public float MoveSpeed
     {
         get { return this.moveSpeed; }
         set { this.moveSpeed = value; }
     }
 
-    //powerup stuff here
+    #endregion
+
+    #region  PlayerGameStats
+
+    private float timeAlive = 0;
+    private bool addTime = true;
+
+    private float maxPlayerStrength = 0;
+
+    void Update()
+    {
+        //time alive
+        if (addTime)
+        {
+            timeAlive += Time.deltaTime;
+        }
+
+        //max strength
+        if (this.Strength > maxPlayerStrength)
+        {
+            maxPlayerStrength = this.Strength;
+        }
+    }
+
+    public void setAddTimeBool(bool value)
+    {
+        addTime = value;
+    }
+
+    //highest leaderboard position 
+    public int getMaxRank()
+    {
+        return GetComponent<Leaderboard>().getMaxRank();
+    }
+
+    //number of objects thrown 
+    public int getNumOfObjectsThrown()
+    {
+        return GetComponent<Grab>().getNumOfObjectsThrown();
+    }
+
+    //person who killed you
+    //kills
+
+    #endregion
+
+    #region  PowerupStuff
+
     public float powerupTime;
     public float strengthPowerupIncrease;
     public float moveSpeedPowerupIncrease;
@@ -66,22 +116,46 @@ public class PlayerStats : MonoBehaviour, IPunObservable
     public float healthRegenInterval;
     public float healthRegenAmount;
 
+    private Dictionary<string, int> numOfPowerups = new Dictionary<string, int>();
+
     IEnumerator IncreaseStrength()
     {
+        if (isUsingPowerup)
+        {
+            yield return null;
+        }
+        isUsingPowerup = true;
+
         this.strength += strengthPowerupIncrease;
         yield return new WaitForSeconds(powerupTime);
         this.strength -= strengthPowerupIncrease;
+
+        isUsingPowerup = false;
     }
 
     IEnumerator IncreaseMoveSpeed()
     {
+        if (isUsingPowerup)
+        {
+            yield return null;
+        }
+        isUsingPowerup = true;
+
         this.moveSpeed += moveSpeedPowerupIncrease;
         yield return new WaitForSeconds(powerupTime);
         this.moveSpeed -= moveSpeedPowerupIncrease;
+
+        isUsingPowerup = false;
     }
 
     IEnumerator HealPlayer()
     {
+        if (isUsingPowerup)
+        {
+            yield return null;
+        }
+        isUsingPowerup = true;
+
         while (this.health <= maxHealth)
         {
             this.health += healthRegenAmount;
@@ -91,20 +165,38 @@ public class PlayerStats : MonoBehaviour, IPunObservable
             }
             yield return new WaitForSeconds(healthRegenInterval);
         }
+
+        isUsingPowerup = false;
     }
 
     IEnumerator SpawnSheild()
     {
+        if (isUsingPowerup)
+        {
+            yield return null;
+        }
+        isUsingPowerup = true;
+
         //spawn sheild
         yield return new WaitForSeconds(powerupTime);
         //despawn shield
+
+        isUsingPowerup = false;
     }
 
     IEnumerator JumpBoost()
     {
+        if (isUsingPowerup)
+        {
+            yield return null;
+        }
+        isUsingPowerup = true;
+
         this.jumpForce += jumpForcePowerupIncrease;
         yield return new WaitForSeconds(powerupTime);
         this.jumpForce -= jumpForcePowerupIncrease;
+
+        isUsingPowerup = false;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -120,4 +212,6 @@ public class PlayerStats : MonoBehaviour, IPunObservable
             this.Strength = (float)stream.ReceiveNext();
         }
     }
+
+    #endregion
 }

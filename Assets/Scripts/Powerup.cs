@@ -82,11 +82,6 @@ public class Powerup : MonoBehaviour
                 break;
         }
 
-        if (type.Equals("heal"))
-        {
-            playerStats.StartCoroutine("IncreaseMoveSpeed");
-        }
-
         objManager.decrementNumOfPowerup();
         PhotonNetwork.Destroy(this.photonView);
     }

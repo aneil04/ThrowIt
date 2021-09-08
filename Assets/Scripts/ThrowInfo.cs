@@ -13,10 +13,15 @@ public class ThrowInfo : MonoBehaviourPun
 
     public bool getIsThrowing() { return this.isThrowing; }
     public void setIsThrowing(bool value) { this.isThrowing = value; }
-    
+
     public float throwReset;
     private float throwResetTime;
     private Rigidbody rb;
+
+    private bool hasTrail;
+    public GameObject trailPrefab;
+    private GameObject trail;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -26,9 +31,22 @@ public class ThrowInfo : MonoBehaviourPun
     {
         if (this.senderPV != -1 && this.rb.velocity.magnitude < 1)
         {
-            Debug.Log("got in here");
             this.senderPV = -1;
             isThrowing = false;
+        }
+
+        if (isThrowing && !hasTrail)
+        {
+            hasTrail = true;
+
+            trail = Instantiate(trailPrefab, this.transform.position, Quaternion.identity);
+            trail.transform.SetParent(this.transform);
+        }
+
+        if (!isThrowing && hasTrail)
+        {
+            hasTrail = false;
+            GameObject.Destroy(trail);
         }
     }
 }

@@ -49,6 +49,9 @@ MonoBehaviour:
   - GrabObject
   - ThrowObject
   - Bob
+  - PlayerJoined
+  - PlayerLeft
+  - PlayerJoin
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

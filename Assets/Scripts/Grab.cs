@@ -5,6 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
 using UnityEngine.UI;
+using TMPro;
 
 public class Grab : MonoBehaviourPun
 {
@@ -30,6 +31,14 @@ public class Grab : MonoBehaviourPun
 
     public GameObject grabBtn;
     public GameObject throwbtn;
+
+    public TextMeshProUGUI currentGrabTxt;
+    List<char> vovels = new List<char>() {'a', 'e', 'i', 'o', 'u'};
+
+    
+    private int numOfObjectsThrown = 0;
+    public int getNumOfObjectsThrown() { return this.numOfObjectsThrown; }
+
 
     private void OnEnable()
     {
@@ -67,7 +76,8 @@ public class Grab : MonoBehaviourPun
         if (obj.tag != "Grabable") { return false; }
         if (obj.GetComponent<Mass>().getMass() > playerStats.Strength) { return false; }
 
-        //increse strength here
+        //TODO: put an actual function here 
+        playerStats.Strength += obj.GetComponent<Mass>().getMass() / 3;
 
         return true;
     }
@@ -95,6 +105,7 @@ public class Grab : MonoBehaviourPun
                 grabCdTimer = grabCooldown;
                 isGrabbing = true;
                 this.currentGrab = this.currentCollisions[0];
+                this.numOfObjectsThrown++;
 
                 this.currentGrab.GetComponent<ThrowInfo>().setSender(base.photonView.ViewID);
 
@@ -145,7 +156,30 @@ public class Grab : MonoBehaviourPun
             grabBtn.SetActive(true);
             throwbtn.SetActive(false);
         }
+
+        if (this.currentGrab == null)
+        {
+            this.currentGrabTxt.text = "Currently grabbing nothing";
+        }
+        else
+        {
+            string txt = "Currently grabbing ";
+            
+            if (vovels.Contains(this.currentGrab.gameObject.name.ToLower()[0])) {
+                txt += "an ";
+            } else {
+                txt += "a ";
+            }
+            txt += this.currentGrab.gameObject.name;
+            
+            if (txt.Contains("(Clone)"))
+            {
+                txt = txt.Remove(txt.Length - 7);
+            }
+            this.currentGrabTxt.text = txt;
+        }
     }
+
     private void OnEvent(EventData photonEvent)
     {
         byte eventCode = photonEvent.Code; //get event code
