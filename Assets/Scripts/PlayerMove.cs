@@ -22,6 +22,8 @@ public class PlayerMove : MonoBehaviour
     public Transform jumpParticlesPos;
     public GameObject jumpParticles;
 
+    public Vector2 xBounds;
+    public Vector2 yBounds;
 
     void FixedUpdate()
     {
@@ -53,6 +55,26 @@ public class PlayerMove : MonoBehaviour
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVel, turnSmoothTime);
 
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            Vector3 finalPos = transform.position + moveDir;
+            if (finalPos.x < xBounds.x)
+            {
+                moveDir.x = 0;
+            }
+            else if (finalPos.x > xBounds.y)
+            {
+                moveDir.x = 0;
+            }
+
+            if (finalPos.z < yBounds.x)
+            {
+                moveDir.z = 0;
+            }
+            else if (finalPos.z > yBounds.y)
+            {
+                moveDir.z = 0;
+            }
+
             rb.MovePosition(transform.position + moveDir * Time.deltaTime * playerStats.MoveSpeed);
         }
         else
@@ -64,7 +86,7 @@ public class PlayerMove : MonoBehaviour
     private bool checkIfGrounded()
     {
         LayerMask mask = LayerMask.GetMask("floor");
-        return Physics.Raycast(raycastOrigin.position, Vector3.down, .3f, mask);
+        return Physics.Raycast(raycastOrigin.position, Vector3.down, .5f, mask);
     }
 
     public void Jump()

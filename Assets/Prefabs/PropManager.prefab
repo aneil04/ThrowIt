@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6138029623538128356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6138029623538128357}
+  - component: {fileID: 6138029623538128358}
+  m_Layer: 0
+  m_Name: PropManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6138029623538128357
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6138029623538128356}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 120}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6138029623538128358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6138029623538128356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73afb9062c15b83409de8f4d51b50caf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allObjects:
+  - {fileID: 362767803292157216, guid: dfbb34ed8e568db418e73d643fc3350b, type: 3}
+  - {fileID: 362767803292157216, guid: 93edff5dbfdad0a4586a46ed49652a45, type: 3}
+  - {fileID: 362767803292157216, guid: 3a485529e6169004eb38cb8921c7f507, type: 3}
+  - {fileID: 362767803292157216, guid: c6df9460780c8ea4eac0c86e4c1bf088, type: 3}
+  - {fileID: 362767803292157216, guid: 22aa56b1c2c259e41a8aa568d75ad4c7, type: 3}
+  force: 100
+  spawnBoundsX: {x: -150, y: 150}
+  spawnBoundsY: {x: -50, y: 30}
+  spawnInterval: {x: 4, y: 5}
+  yOffset: 0.15
+  scale: {x: 20, y: 20, z: 20}
+  angularVelocityRange: {x: -1, y: 1}
+  outline: {fileID: 1356411030657244532, guid: 8982cdcbd6679e54eacbc4b490fad403, type: 3}

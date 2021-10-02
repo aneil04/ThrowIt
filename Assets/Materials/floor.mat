@@ -8,14 +8,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: floor
-  m_Shader: {fileID: 4800000, guid: 8d2bb70cbf9db8d4da26e15b26e74248, type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: bf1b67d8223379749a0a88d47d0a7154, type: 3}
+  m_ShaderKeywords: USE_RT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -25,6 +24,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Control0:
+        m_Texture: {fileID: 4986787454639410979, guid: 26ea38e7c47a5654eb2d4d5237e19cf7, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Control1:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -40,15 +47,67 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Distortion:
+        m_Texture: {fileID: 2800000, guid: 7dca70292f589e345aef9b57403a46e6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _GrassTex:
+        m_Texture: {fileID: 2800000, guid: 5ddef0977dde72343992a79d27da33fe, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GroundTex:
+        m_Texture: {fileID: 2800000, guid: 7f969087a2b5cf840bdda1c1d1e3a930, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 4e1d764fa7e47f34eae88e37253c2542, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoGrassTex:
+        m_Texture: {fileID: 2800000, guid: 312b3c84e725b884fbf388d04107c2d0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise:
+        m_Texture: {fileID: 2800000, guid: 529789b31389da34d9a7f98c613bf944, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal0:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal4:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal5:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal6:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal7:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -61,6 +120,38 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Splat0:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 1}
+    - _Splat1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 1}
+    - _Splat2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 1}
+    - _Splat3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 1}
+    - _Splat4:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Splat5:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Splat6:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Splat7:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -78,6 +169,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaClip: 0
+    - _BiPlanarSize: 1
+    - _BiPlanarStrength: 1
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
@@ -88,15 +181,39 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
+    - _FadeDistanceEnd: 100
+    - _FadeDistanceStart: 16
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossinessSource: 0
     - _GlossyReflections: 0
+    - _GrassCut: 0.007
+    - _GrassSaturation: 2
+    - _GrassShading: 0.085
+    - _GrassThinness: 0.4
+    - _GrassThinnessIntersection: 0.43
     - _Metallic: 0
+    - _Metallic0: 0
+    - _Metallic1: 0
+    - _Metallic2: 0
+    - _Metallic3: 0
+    - _Metallic4: 0
+    - _Metallic5: 0
+    - _Metallic6: 0
+    - _Metallic7: 0
+    - _MinimumNumberStacks: 2
+    - _NoisePower: 2
+    - _NumberOfStacks: 7
     - _OcclusionStrength: 1
+    - _OffsetValue: 1
     - _Parallax: 0.005
+    - _ProceduralDistance: 5.5
+    - _ProceduralStrength: 1.5
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _RimMax: 0.62
+    - _RimMin: 0.241
+    - _RimPower: 3.14
     - _Shininess: 0
     - _Smoothness: 0
     - _SmoothnessSource: 0
@@ -105,13 +222,43 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
+    - _TilingN1: 6.06
+    - _TilingN2: 0.05
+    - _TilingN3: 1
+    - _UseBiplanar: 0
+    - _UsePR: 0
+    - _UseRT: 1
+    - _UseShadow: 0
+    - _UseShadowCast: 0
+    - _UseWC: 0
+    - _WindForce: 0.35
+    - _WindMovement: 0.55
     - _WorkflowMode: 1
+    - _WorldRotation: 0
+    - _WorldScale: 10
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.33094516, g: 0.3363786, b: 0.3490566, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.3427026, g: 0.5849056, b: 0.25658596, a: 1}
+    - _Color: {r: 0.19630966, g: 0.33962262, b: 0.049341388, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _GroundColor: {r: 0.6792453, g: 0.60965896, b: 0.40626556, a: 1}
+    - _OffsetVector: {r: 0, g: 0, b: 0, a: 1}
+    - _ProjectedShadowColor: {r: 0.45, g: 0.41999996, b: 0.04, a: 1}
+    - _RimColor: {r: 0.13999996, g: 0.17999998, b: 0.089999996, a: 1}
+    - _SelfShadowColor: {r: 0.40999997, g: 0.40999997, b: 0.35999998, a: 1}
     - _SpecColor: {r: 0.14702284, g: 0.3773585, b: 0, a: 1}
+    - _Specular0: {r: 1, g: 1, b: 1, a: 1}
+    - _Specular1: {r: 1, g: 1, b: 1, a: 1}
+    - _Specular2: {r: 1, g: 1, b: 1, a: 1}
+    - _Specular3: {r: 1, g: 1, b: 1, a: 1}
+    - _Specular4: {r: 1, g: 1, b: 1, a: 1}
+    - _Specular5: {r: 1, g: 1, b: 1, a: 1}
+    - _Specular6: {r: 1, g: 1, b: 1, a: 1}
+    - _Specular7: {r: 1, g: 1, b: 1, a: 1}
+    - _Splat4_STn: {r: 1, g: 1, b: 0, a: 1}
+    - _Splat5_STn: {r: 1, g: 1, b: 0, a: 1}
+    - _Splat6_STn: {r: 1, g: 1, b: 0, a: 1}
+    - _Splat7_STn: {r: 1, g: 1, b: 0, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &4429334335164679796
 MonoBehaviour:

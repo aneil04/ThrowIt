@@ -35,12 +35,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             isConnecting = false;
         }
     }
-    
+
     //TODO: make sure to check that the error was because there were no availble rooms 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         Debug.Log("Join room failed. Trying to create room...");
-        PhotonNetwork.CreateRoom(null, new RoomOptions());
+
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.MaxPlayers = 10;
+
+        PhotonNetwork.CreateRoom(null, roomOptions);
         // CreateRoom();
     }
 
@@ -65,8 +69,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.NickName = nameInput.text;
         }
-        
-        PhotonNetwork.LoadLevel("EndlessMap");
+
+        PhotonNetwork.LoadLevel("FloatingMap");
     }
 
     public override void OnDisconnected(DisconnectCause cause)

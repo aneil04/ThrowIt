@@ -10,8 +10,8 @@ public class ObjManager : MonoBehaviour, IPunOwnershipCallbacks
     public Vector2 xBounds;
     public Vector2 zBounds;
     public float yHeight;
-    public float objDensity; 
-    float totalNumOfObjects; 
+    public float objDensity;
+    float totalNumOfObjects;
     private PhotonView photonView;
 
     private int numOfPowerups = 0;
@@ -23,6 +23,8 @@ public class ObjManager : MonoBehaviour, IPunOwnershipCallbacks
     private float spawnTime;
     public float powerupDensity;
     float totalNumOfPowerups;
+
+    public bool isMenu;
 
     void Start()
     {
@@ -37,7 +39,7 @@ public class ObjManager : MonoBehaviour, IPunOwnershipCallbacks
             spawnObj();
         }
 
-        while (this.numOfPowerups <= totalNumOfPowerups)
+        while (this.numOfPowerups <= totalNumOfPowerups && !isMenu)
         {
             spawnPowerup();
         }
@@ -45,7 +47,7 @@ public class ObjManager : MonoBehaviour, IPunOwnershipCallbacks
 
     void Update()
     {
-        if (this.numOfPowerups < totalNumOfPowerups)
+        if (this.numOfPowerups < totalNumOfPowerups && !isMenu)
         {
             while (this.numOfPowerups <= totalNumOfPowerups)
             {
@@ -58,7 +60,14 @@ public class ObjManager : MonoBehaviour, IPunOwnershipCallbacks
     {
         GameObject objToSpawn = allObjects[(int)Random.Range(0, allObjects.Count)];
         Vector3 spawnPos = new Vector3(Random.Range(xBounds.x, xBounds.y), yHeight, Random.Range(zBounds.x, zBounds.y));
-        PhotonNetwork.InstantiateRoomObject(objToSpawn.name, spawnPos, Quaternion.identity);
+        if (isMenu)
+        {
+            Instantiate(objToSpawn, spawnPos, Quaternion.identity);
+        }
+        else
+        {
+            PhotonNetwork.InstantiateRoomObject(objToSpawn.name, spawnPos, Quaternion.identity);
+        }
         this.numOfObjects++;
     }
 

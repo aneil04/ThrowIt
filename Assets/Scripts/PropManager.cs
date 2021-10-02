@@ -8,13 +8,13 @@ public class PropManager : MonoBehaviour
 
     public float force;
 
-    public Vector2 spawnBoundsX;
-    public Vector2 spawnBoundsY;
+    public Vector2 spawnX; //x == left, y == right
+    public Vector2 spawnBoundsZ;
+    public float yHeight;
 
     public Vector2 spawnInterval;
     private float timeToSpawn = 0f;
 
-    public float yOffset;
     public Vector3 scale;
 
     public Vector2 angularVelocityRange;
@@ -37,20 +37,18 @@ public class PropManager : MonoBehaviour
         Vector3 forceVector;
         if (Random.Range(0, 10) < 5) //left
         {
-            pos = new Vector3(spawnBoundsX.x, Random.Range(spawnBoundsY.x, spawnBoundsY.y), this.transform.position.z);
+            pos = new Vector3(spawnX.x, yHeight, Random.Range(spawnBoundsZ.x, spawnBoundsZ.y));
             forceVector = Vector3.right;
         }
         else //right
         {
-            pos = new Vector3(spawnBoundsX.y, Random.Range(spawnBoundsY.x, spawnBoundsY.y), this.transform.position.z);
+            pos = new Vector3(spawnX.y, yHeight, Random.Range(spawnBoundsZ.x, spawnBoundsZ.y));
             forceVector = Vector3.left;
         }
-        forceVector.y += yOffset;
         forceVector.z -= 0.05f;
 
         GameObject obj = Instantiate(allObjects[index], pos, Quaternion.identity);
         GameObject objOutline = Instantiate(outline, pos, Quaternion.identity);
-
 
         objOutline.transform.SetParent(obj.transform);
 
