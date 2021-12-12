@@ -27,8 +27,12 @@ public class DamagePlayer : MonoBehaviour
         PlayerDamage playerDamage = playerToDamage.GetComponent<PlayerDamage>();
         float damageAmount = 20;
         // rb.velocity.magnitude * objMass.getMass() / 3;
-        playerDamage.damagePlayer(damageAmount, PhotonView.Find(info.getSender()).Owner.NickName);
-
+        playerDamage.damagePlayer(damageAmount, info.getSender());
         info.setIsThrowing(false);
+
+        Rigidbody playerRB = playerToDamage.GetComponent<Rigidbody>();
+        Vector3 forceVector = this.transform.position - playerToDamage.transform.position;
+        forceVector.y = 0;
+        playerRB.AddForce(forceVector * 800, ForceMode.Impulse);
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
+using TMPro;
+using System;
 
 public class PlayerStats : MonoBehaviour, IPunObservable
 {
@@ -23,10 +25,21 @@ public class PlayerStats : MonoBehaviour, IPunObservable
 
     private bool isUsingPowerup;
 
+    public TextMeshProUGUI killedByField;
+    public TextMeshProUGUI timeAliveField;
+    public TextMeshProUGUI numKillsField;
+    public TextMeshProUGUI maxStrengthField;
+    public TextMeshProUGUI objectsThrownField;
+    public TextMeshProUGUI highestRankField;
+
+    private String killedBy;
+    private int kills = 0;
+
+    public Grab grab;
+
     void Start()
     {
         // if (!photonView.IsMine) { return; }
-
         healthSlider.maxValue = maxHealth;
         strengthSlider.maxValue = maxStrength;
 
@@ -85,6 +98,18 @@ public class PlayerStats : MonoBehaviour, IPunObservable
         }
     }
 
+    public void setFields()
+    {
+        Debug.Log("updated stats");
+        killedByField.text = "Killed by: " + killedBy;
+        timeAliveField.text = "Time alive: " + (int)(Time.timeSinceLevelLoad) + "s";
+        numKillsField.text = "Kills: " + kills;
+        maxStrengthField.text = "Max Strength: " + maxPlayerStrength;
+        objectsThrownField.text = "Objects Thrown: " + getNumOfObjectsThrown();
+        highestRankField.text = "Highest Rank: " + "1";
+        //getMaxRank();
+    }
+
     public void setAddTimeBool(bool value)
     {
         addTime = value;
@@ -99,11 +124,18 @@ public class PlayerStats : MonoBehaviour, IPunObservable
     //number of objects thrown 
     public int getNumOfObjectsThrown()
     {
-        return GetComponent<Grab>().getNumOfObjectsThrown();
+        return grab.getNumOfObjectsThrown();
     }
 
     //person who killed you
+    public void setKilledBy(String name) {
+        this.killedBy = name;
+    }
+
     //kills
+    public void incrementKills() {
+        kills++;
+    }
 
     #endregion
 

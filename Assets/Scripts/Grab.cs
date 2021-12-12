@@ -18,6 +18,8 @@ public class Grab : MonoBehaviourPun
     public float maxStrength;
 
     [SerializeField] private bool isGrabbing = false;
+    public bool getIsGrabbing() { return this.isGrabbing; }
+
     public float grabCooldown = 1; //implemented so players don't spam grab and throw 
     private float grabCdTimer = 0;
 
@@ -33,12 +35,10 @@ public class Grab : MonoBehaviourPun
     public GameObject throwbtn;
 
     public TextMeshProUGUI currentGrabTxt;
-    List<char> vovels = new List<char>() {'a', 'e', 'i', 'o', 'u'};
+    List<char> vovels = new List<char>() { 'a', 'e', 'i', 'o', 'u' };
 
-    
     private int numOfObjectsThrown = 0;
     public int getNumOfObjectsThrown() { return this.numOfObjectsThrown; }
-
 
     private void OnEnable()
     {
@@ -82,13 +82,13 @@ public class Grab : MonoBehaviourPun
         return true;
     }
 
-    void grabObject(int objViewID, int playerViewID)
+    public void grabObject(int objViewID, int playerViewID)
     {
         GameObject obj = PhotonView.Find(objViewID).gameObject;
         obj.GetComponent<ObjOwner>().OwnerViewID = playerViewID;
     }
 
-    void throwObject(int objViewID)
+    public void throwObject(int objViewID)
     {
         GameObject obj = PhotonView.Find(objViewID).gameObject;
         obj.GetComponent<ObjOwner>().OwnerViewID = -1;
@@ -96,12 +96,16 @@ public class Grab : MonoBehaviourPun
 
     public void GrabOrThrowObject()
     {
-        if (!base.photonView.IsMine) { return; }
+        if (!base.photonView.IsMine)
+        {
+            return;
+        }
 
         if (!isGrabbing && grabCdTimer <= 0) //grab the object
         {
             if (currentCollisions.Count > 0 && checkGrabConditions(this.currentCollisions[0]))
             {
+                Debug.Log("grabbed object");
                 grabCdTimer = grabCooldown;
                 isGrabbing = true;
                 this.currentGrab = this.currentCollisions[0];
@@ -120,6 +124,7 @@ public class Grab : MonoBehaviourPun
         }
         else if (isGrabbing) //throw the object 
         {
+            Debug.Log("threw object");
             isGrabbing = false;
 
             object[] content = new object[] { this.currentGrab.GetComponent<PhotonView>().ViewID };
@@ -164,14 +169,17 @@ public class Grab : MonoBehaviourPun
         else
         {
             string txt = "Currently grabbing ";
-            
-            if (vovels.Contains(this.currentGrab.gameObject.name.ToLower()[0])) {
+
+            if (vovels.Contains(this.currentGrab.gameObject.name.ToLower()[0]))
+            {
                 txt += "an ";
-            } else {
+            }
+            else
+            {
                 txt += "a ";
             }
             txt += this.currentGrab.gameObject.name;
-            
+
             if (txt.Contains("(Clone)"))
             {
                 txt = txt.Remove(txt.Length - 7);

@@ -7,6 +7,8 @@ using Photon.Realtime;
 public class ObjManager : MonoBehaviour, IPunOwnershipCallbacks
 {
     public List<GameObject> allObjects = new List<GameObject>();
+    private List<GameObject> sceneObjects = new List<GameObject>();
+
     public Vector2 xBounds;
     public Vector2 zBounds;
     public float yHeight;
@@ -56,7 +58,9 @@ public class ObjManager : MonoBehaviour, IPunOwnershipCallbacks
         }
     }
 
-    void spawnObj()
+    public List<GameObject> getSceneGameobjects() { return this.sceneObjects; }
+
+    public void spawnObj()
     {
         GameObject objToSpawn = allObjects[(int)Random.Range(0, allObjects.Count)];
         Vector3 spawnPos = new Vector3(Random.Range(xBounds.x, xBounds.y), yHeight, Random.Range(zBounds.x, zBounds.y));
@@ -66,7 +70,8 @@ public class ObjManager : MonoBehaviour, IPunOwnershipCallbacks
         }
         else
         {
-            PhotonNetwork.InstantiateRoomObject(objToSpawn.name, spawnPos, Quaternion.identity);
+            GameObject instance = PhotonNetwork.InstantiateRoomObject(objToSpawn.name, spawnPos, Quaternion.identity);
+            sceneObjects.Add(instance);
         }
         this.numOfObjects++;
     }

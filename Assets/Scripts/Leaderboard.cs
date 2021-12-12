@@ -7,9 +7,9 @@ using System.Linq;
 using ExitGames.Client.Photon;
 using TMPro;
 
-public class Leaderboard : MonoBehaviourPun
+public class Leaderboard : MonoBehaviourPunCallbacks
 {
-    private List<int> currentPlayers = new List<int>();
+    private List<string> currentPlayers = new List<string>();
 
     public float updateInterval;
     private float elapsedTime = 0;
@@ -40,23 +40,32 @@ public class Leaderboard : MonoBehaviourPun
         PhotonNetwork.NetworkingClient.EventReceived -= OnEvent;
     }
 
-    public void playerJoin(int other)
-    {
-        currentPlayers.Add(other);
-    }
+    // public void playerJoin(int other)
+    // {
+    //     currentPlayers.Add(other);
+    // }
 
     //TODO: call this method when the player disconnects from the room
-    public void playerLeft(int other)
+    public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        currentPlayers.Remove(other);
+        currentPlayers.Add(newPlayer.UserId);
     }
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        currentPlayers.Add(otherPlayer.UserId);
+    }
+
+    // public void playerLeft(int other)
+    // {
+    //     currentPlayers.Remove(other);
+    // }
 
     void Update()
     {
         if (elapsedTime < 0)
         {
             elapsedTime = updateInterval;
-            updateLeaderboard();
+            // updateLeaderboard();
 
         }
         else
@@ -69,10 +78,10 @@ public class Leaderboard : MonoBehaviourPun
     {
         Dictionary<int, float> playerStrength = new Dictionary<int, float>(); //dict w view id and strength
         List<int> leaderboard = new List<int>(); //list with view id
-
-        for (int x = 0; x < currentPlayers.Count; x++)
+        
+        for (int x = 0; x < PhotonNetwork.PlayerList.Length; x++)
         {
-            playerStrength.Add(currentPlayers[x], PhotonView.Find(currentPlayers[0]).gameObject.GetComponent<PlayerStats>().Strength);
+            // playerStrength.Add(currentPlayers[x], PhotonView.Find(currentPlayers[0]).gameObject.GetComponent<PlayerStats>().Strength);
         }
 
         foreach (KeyValuePair<int, float> val in playerStrength.OrderBy(key => key.Value)) //least to greatest 
@@ -95,7 +104,7 @@ public class Leaderboard : MonoBehaviourPun
         if (eventCode == PLAYER_JOIN_CODE) //grab the object   
         {
             object[] data = (object[])photonEvent.CustomData;
-            playerJoin((int)data[0]);
+            // playerJoin((int)data[0]);
         }
 
     }

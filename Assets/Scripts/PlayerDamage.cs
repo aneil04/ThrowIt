@@ -20,7 +20,11 @@ public class PlayerDamage : MonoBehaviourPunCallbacks
         deathScreenUI.SetActive(false);
     }
 
-    public void damagePlayer(float amount, string playerName)
+    void Update() {
+        // damagePlayer(1f, this.photonView.ViewID);
+    }
+
+    public void damagePlayer(float amount, int killedByViewId)
     {
         float newHealth = this.playerStats.Health - amount;
         this.playerStats.Health = newHealth;
@@ -28,13 +32,15 @@ public class PlayerDamage : MonoBehaviourPunCallbacks
         if (playerStats.Health <= 0 && !isDead)
         {
             isDead = true;
-            displayPlayerInfo(playerName);
+            PhotonView.Find(killedByViewId).gameObject.GetComponent<PlayerStats>().incrementKills();
+            displayPlayerInfo(PhotonView.Find(killedByViewId).Owner.NickName);
         }
     }
 
     public void displayPlayerInfo(string killedBy)
     {
-        Debug.Log("Killed by: " + killedBy);
+        playerStats.setKilledBy(killedBy);
+        playerStats.setFields();
         gameUI.SetActive(false);
         deathScreenUI.SetActive(true);
     }
@@ -52,5 +58,9 @@ public class PlayerDamage : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void revivePlayer() {
+        Debug.Log("revived player");
     }
 }

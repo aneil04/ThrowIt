@@ -44,6 +44,8 @@ public class ObjOwner : MonoBehaviourPun
         }
     }
 
+    public bool getIsGrabbing() { return this.isThrowing; }
+
     IEnumerator ThrowObject()
     {
         yield return new WaitForSeconds(throwDelay);
@@ -57,7 +59,7 @@ public class ObjOwner : MonoBehaviourPun
         rigidbody.AddForce(this.ownerGrabPos.transform.forward * power, ForceMode.Impulse);
 
         this.GetComponent<ThrowInfo>().setIsThrowing(true);
-        
+
         isThrowing = false;
         this.ownerGrabPos = null;
     }
