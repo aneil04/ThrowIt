@@ -2344,7 +2344,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2839795209959249729}
   serializedVersion: 2
-  m_Mass: 75
+  m_Mass: 60
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
@@ -2451,6 +2451,8 @@ MonoBehaviour:
   jumpParticles: {fileID: 1442799361028993830, guid: a97469b4ac5f6fe478d6cbba65e778e6, type: 3}
   xBounds: {x: -50, y: 50}
   yBounds: {x: -50, y: 50}
+  isHit: 0
+  hitTime: 3
 --- !u!114 &6965449100405735094
 MonoBehaviour:
   m_ObjectHideFlags: 0

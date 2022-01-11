@@ -25,9 +25,28 @@ public class PlayerMove : MonoBehaviour
     public Vector2 xBounds;
     public Vector2 yBounds;
 
+    public bool isHit;
+    public float hitTime;
+    private float timeSinceHit = 0;
+
     void FixedUpdate()
     {
         if (!pv.IsMine) { return; }
+
+        if (isHit)
+        {
+            timeSinceHit += Time.fixedDeltaTime;
+
+            if (timeSinceHit >= hitTime || rb.velocity.magnitude <= 0.1f)
+            {
+                isHit = false;
+                timeSinceHit = 0;
+
+                rb.velocity = Vector3.zero;
+            }
+
+            return;
+        }
 
         jumpDelayTime += Time.fixedDeltaTime;
         if (isJumping && jumpDelayTime >= jumpDelay)

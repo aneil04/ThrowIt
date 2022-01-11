@@ -14,6 +14,8 @@ public class PlayerDamage : MonoBehaviourPunCallbacks
     public GameObject deathScreenUI;
     private bool isDead;
 
+    private int lastPlayerDamage = 0;
+
     void Start()
     {
         gameUI.SetActive(true);
@@ -22,12 +24,17 @@ public class PlayerDamage : MonoBehaviourPunCallbacks
 
     void Update() {
         // damagePlayer(1f, this.photonView.ViewID);
+        if (transform.position.y <= -10) {
+            damagePlayer(1000, lastPlayerDamage);
+            Debug.Log("fell");
+        }
     }
 
     public void damagePlayer(float amount, int killedByViewId)
     {
         float newHealth = this.playerStats.Health - amount;
         this.playerStats.Health = newHealth;
+        lastPlayerDamage = killedByViewId;
 
         if (playerStats.Health <= 0 && !isDead)
         {

@@ -33,12 +33,18 @@ public class AgentManager : MonoBehaviour
     public Animator playerAnimator;
     public float throwTime;
 
+    public bool isHit;
+    public float hitTime;
+    private float timeSinceHit = 0;
+
+    private Rigidbody rb;
+
     // Start is called before the first frame update
     void Start()
     {
         manager = GameObject.FindGameObjectWithTag("ObjManager").GetComponent<ObjManager>();
         state = 0;
-
+        rb = GetComponent<Rigidbody>();
         // agent.angularSpeed = 360;
     }
 
@@ -46,6 +52,27 @@ public class AgentManager : MonoBehaviour
     void Update()
     {
         if (!pv.IsMine) { return; }
+
+        if (isHit)
+        {
+            if (agent.enabled)
+            {
+                agent.enabled = false;
+            }
+
+            timeSinceHit += Time.fixedDeltaTime;
+
+            if (timeSinceHit >= hitTime || rb.velocity.magnitude <= 0.1f)
+            {
+                isHit = false;
+                timeSinceHit = 0;
+
+                agent.enabled = true;
+                agent.velocity = Vector3.zero;
+            }
+
+            return;
+        }
 
         if (agent.velocity.magnitude > 0.1f)
         {
@@ -138,8 +165,10 @@ public class AgentManager : MonoBehaviour
         float largestMass = -Mathf.Infinity;
         float minDistance = Mathf.Infinity;
 
-        foreach (GameObject obj in sceneObj)
+        for (int x = 0; x < 25; x++)
         {
+            GameObject obj = sceneObj[(int)Random.Range(0, sceneObj.Count)];
+
             if (obj != null && obj.GetComponent<ObjOwner>().OwnerViewID == -1) //checks if object is currently grabbed 
             {
                 float distToObj = Vector3.Distance(obj.transform.position, this.transform.position);
@@ -151,6 +180,7 @@ public class AgentManager : MonoBehaviour
                         largestMass = mass;
                         minDistance = distToObj;
                         target = obj;
+                        break;
                     }
                 }
             }

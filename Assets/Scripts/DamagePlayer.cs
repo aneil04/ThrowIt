@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.AI;
 
 public class DamagePlayer : MonoBehaviour
 {
@@ -31,8 +32,16 @@ public class DamagePlayer : MonoBehaviour
         info.setIsThrowing(false);
 
         Rigidbody playerRB = playerToDamage.GetComponent<Rigidbody>();
-        Vector3 forceVector = this.transform.position - playerToDamage.transform.position;
+        Vector3 forceVector = playerToDamage.transform.position - this.transform.position;
         forceVector.y = 0;
-        playerRB.AddForce(forceVector * 800, ForceMode.Impulse);
+        playerRB.AddForce(forceVector.normalized * 800, ForceMode.Impulse);
+
+        if (playerToDamage.GetComponent<NavMeshAgent>()) { //ai
+            playerToDamage.GetComponent<AgentManager>().isHit = true;
+        } else { //player
+            playerToDamage.GetComponent<PlayerMove>().isHit = true;
+        }
+
+        // playerRB.AddExplosionForce(800, col.contacts[0].point, 0.1f, 0, ForceMode.Impulse);
     }
 }

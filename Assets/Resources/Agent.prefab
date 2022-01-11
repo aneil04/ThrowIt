@@ -7307,7 +7307,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4810986526754137483}
   serializedVersion: 2
-  m_Mass: 75
+  m_Mass: 60
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
@@ -7414,6 +7414,8 @@ MonoBehaviour:
   jumpParticles: {fileID: 1442799361028993830, guid: a97469b4ac5f6fe478d6cbba65e778e6, type: 3}
   xBounds: {x: -50, y: 50}
   yBounds: {x: -50, y: 50}
+  isHit: 0
+  hitTime: 0
 --- !u!114 &362200563495701628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7500,6 +7502,8 @@ MonoBehaviour:
   accessor: {fileID: -580987067557021906}
   playerAnimator: {fileID: 1493666674509475205}
   throwTime: 1
+  isHit: 0
+  hitTime: 3
 --- !u!114 &-580987067557021906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7528,9 +7532,9 @@ NavMeshAgent:
   avoidancePriority: 50
   m_AngularSpeed: 5000
   m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
+  m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 0
-  m_AutoRepath: 1
+  m_AutoRepath: 0
   m_Height: 2.99
   m_BaseOffset: 0
   m_WalkableMask: 4294967295

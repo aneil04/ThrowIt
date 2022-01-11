@@ -105,7 +105,6 @@ public class Grab : MonoBehaviourPun
         {
             if (currentCollisions.Count > 0 && checkGrabConditions(this.currentCollisions[0]))
             {
-                Debug.Log("grabbed object");
                 grabCdTimer = grabCooldown;
                 isGrabbing = true;
                 this.currentGrab = this.currentCollisions[0];
@@ -124,7 +123,6 @@ public class Grab : MonoBehaviourPun
         }
         else if (isGrabbing) //throw the object 
         {
-            Debug.Log("threw object");
             isGrabbing = false;
 
             object[] content = new object[] { this.currentGrab.GetComponent<PhotonView>().ViewID };

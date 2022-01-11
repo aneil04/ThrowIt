@@ -8,6 +8,7 @@ TagManager:
   - Grabable
   - Persist
   - ObjManager
+  - Agent
   layers:
   - Default
   - TransparentFX
