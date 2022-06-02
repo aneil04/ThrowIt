@@ -96,7 +96,7 @@ public class NetOutline : MonoBehaviour
 
     private Color getOutlineColor()
     {
-        if (photonView.IsMine)
+        if (photonView.IsMine && this.gameObject.tag.Equals("PlayerOutline"))
         {
             return friendly;
         }

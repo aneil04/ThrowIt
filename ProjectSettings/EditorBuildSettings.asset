@@ -11,9 +11,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/EndlessMap.unity
     guid: 26a4a7de55b238849865bb5c32300edd
-  - enabled: 1
-    path: Assets/Scenes/DeathScreen.unity
-    guid: 5df6cb18655a2ee4487549bef9fe65e7
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/FloatingMap.unity
     guid: 6b48d35db21e3e7419bc91f07d976eb4

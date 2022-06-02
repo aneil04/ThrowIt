@@ -35,8 +35,9 @@ public class PlayerMove : MonoBehaviour
 
         if (isHit)
         {
-            timeSinceHit += Time.fixedDeltaTime;
+            playerAnimator.SetBool("isRunning", false);
 
+            timeSinceHit += Time.fixedDeltaTime;
             if (timeSinceHit >= hitTime || rb.velocity.magnitude <= 0.1f)
             {
                 isHit = false;

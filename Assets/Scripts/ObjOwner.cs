@@ -28,7 +28,14 @@ public class ObjOwner : MonoBehaviourPun
     {
         if (this.ownerViewId != -1 && this.ownerGrabPos == null) //executed once after you grab something 
         {
-            this.ownerGrabPos = PhotonView.Find(this.ownerViewId).gameObject.transform.GetChild(3);
+            if (PhotonView.Find(this.ownerViewId).gameObject.transform.GetChild(4).name.Equals("Grab Pos"))
+            {
+                this.ownerGrabPos = PhotonView.Find(this.ownerViewId).gameObject.transform.GetChild(4);
+            }
+            else
+            {
+                this.ownerGrabPos = PhotonView.Find(this.ownerViewId).gameObject.transform.GetChild(3);
+            }
         }
 
         if (this.ownerGrabPos != null) // always follow the grab position of the owner 

@@ -26,7 +26,7 @@ public class PlayerMaterial : MonoBehaviour
 
     void Start()
     {
-        if (!photonView.IsMine) { return; }
+        // if (!photonView.IsMine) { return; }
 
         int colorIndex = 0;
 
@@ -39,7 +39,13 @@ public class PlayerMaterial : MonoBehaviour
         colorIndex = (int)Random.Range(0, legColors.Length);
         legColor = legColors[colorIndex];
 
-        photonView.RPC("SetPlayerColor", RpcTarget.AllBuffered, getVectorFromColor(skinColor), getVectorFromColor(shirtColor), getVectorFromColor(legColor), this.photonView.ViewID);
+        GameObject targetGraphics = transform.Find("Graphics").gameObject;
+        GameObject targetCharacter = targetGraphics.transform.Find("Character").gameObject;
+
+        targetCharacter.transform.Find("Arms and Head").gameObject.GetComponent<Renderer>().material.color = skinColor;
+        targetCharacter.transform.Find("Shirt").gameObject.GetComponent<Renderer>().material.color = shirtColor;
+        targetCharacter.transform.Find("Legs").gameObject.GetComponent<Renderer>().material.color = legColor;
+        // photonView.RPC("SetPlayerColor", RpcTarget.AllBuffered, getVectorFromColor(skinColor), getVectorFromColor(shirtColor), getVectorFromColor(legColor), this.photonView.ViewID);
     }
 
     [PunRPC]

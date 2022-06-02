@@ -10,9 +10,12 @@ public class SetPlayerName : MonoBehaviour
 
     void Update()
     {
-        if (playerNameUI.text != (string)PhotonNetwork.NickName)
-        {
-            playerNameUI.text = (string)PhotonNetwork.NickName;
-        }
+        GameObject persist = GameObject.FindGameObjectWithTag("Persist");
+
+        playerNameUI.text = persist.GetComponent<PlayerName>().playerName;
+        // if (playerNameUI.text != (string)PhotonNetwork.NickName)
+        // {
+        //     playerNameUI.text = (string)PhotonNetwork.NickName;
+        // }
     }
 }

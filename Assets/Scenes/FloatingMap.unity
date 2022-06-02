@@ -273,6 +273,10 @@ PrefabInstance:
       value: RockyIsland (1)
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 95debd511970b0f459b7728d0f40a017, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 95debd511970b0f459b7728d0f40a017, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
@@ -403,7 +407,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -427,6 +431,10 @@ PrefabInstance:
     - target: {fileID: 2026915188140189434, guid: c4ab5459398140243b5f2a47a11728b5, type: 3}
       propertyPath: m_Name
       value: Cloud 2 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2026915188140189434, guid: c4ab5459398140243b5f2a47a11728b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3055047639965144501, guid: c4ab5459398140243b5f2a47a11728b5, type: 3}
       propertyPath: m_RootOrder
@@ -775,6 +783,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cloud 2 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 2026915188140189434, guid: c4ab5459398140243b5f2a47a11728b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3055047639965144501, guid: c4ab5459398140243b5f2a47a11728b5, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -840,6 +852,10 @@ PrefabInstance:
     - target: {fileID: 70747292198544456, guid: 53ed07edf79378b4bab4b4e1cb12591e, type: 3}
       propertyPath: m_Name
       value: Cloud 1 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 70747292198544456, guid: 53ed07edf79378b4bab4b4e1cb12591e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6433341617360789816, guid: 53ed07edf79378b4bab4b4e1cb12591e, type: 3}
       propertyPath: sceneViewId
@@ -914,6 +930,10 @@ PrefabInstance:
     - target: {fileID: 2191353553970289876, guid: f5150bf8a102cfb4d9ce7cc18a6ce66b, type: 3}
       propertyPath: m_Name
       value: Cloud 6 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2191353553970289876, guid: f5150bf8a102cfb4d9ce7cc18a6ce66b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2848646188612922922, guid: f5150bf8a102cfb4d9ce7cc18a6ce66b, type: 3}
       propertyPath: m_RootOrder
@@ -1025,13 +1045,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2823644759770908472, guid: d0fda24d79200784db9e2ba8456a5e12, type: 3}
+      propertyPath: m_TagString
+      value: GameController
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630864368811117560, guid: d0fda24d79200784db9e2ba8456a5e12, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6630864368811117560, guid: d0fda24d79200784db9e2ba8456a5e12, type: 3}
       propertyPath: agentPrefab
       value: 
       objectReference: {fileID: 4810986526754137483, guid: 2b997103afb3e544cbccc8e7be835278, type: 3}
     - target: {fileID: 6630864368811117560, guid: d0fda24d79200784db9e2ba8456a5e12, type: 3}
       propertyPath: numOfAgents
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8778111717825734060, guid: d0fda24d79200784db9e2ba8456a5e12, type: 3}
       propertyPath: sceneViewId
@@ -1053,6 +1081,10 @@ PrefabInstance:
     - target: {fileID: 2191353553970289876, guid: f5150bf8a102cfb4d9ce7cc18a6ce66b, type: 3}
       propertyPath: m_Name
       value: Cloud 6 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2191353553970289876, guid: f5150bf8a102cfb4d9ce7cc18a6ce66b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2848646188612922922, guid: f5150bf8a102cfb4d9ce7cc18a6ce66b, type: 3}
       propertyPath: m_RootOrder
@@ -1237,6 +1269,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cloud 5 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 1517746346420097844, guid: d92fed9c208ab514d9dce988012d06d6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2267334848475381868, guid: d92fed9c208ab514d9dce988012d06d6, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1377,6 +1413,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cloud 5 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1517746346420097844, guid: d92fed9c208ab514d9dce988012d06d6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2267334848475381868, guid: d92fed9c208ab514d9dce988012d06d6, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -1512,6 +1552,10 @@ PrefabInstance:
       value: RockyIsland (3)
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 95debd511970b0f459b7728d0f40a017, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 95debd511970b0f459b7728d0f40a017, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
@@ -1559,6 +1603,10 @@ PrefabInstance:
     - target: {fileID: 1517746346420097844, guid: d92fed9c208ab514d9dce988012d06d6, type: 3}
       propertyPath: m_Name
       value: Cloud 5 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1517746346420097844, guid: d92fed9c208ab514d9dce988012d06d6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2267334848475381868, guid: d92fed9c208ab514d9dce988012d06d6, type: 3}
       propertyPath: m_RootOrder
@@ -1629,6 +1677,10 @@ PrefabInstance:
     - target: {fileID: 2191353553970289876, guid: f5150bf8a102cfb4d9ce7cc18a6ce66b, type: 3}
       propertyPath: m_Name
       value: Cloud 6 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2191353553970289876, guid: f5150bf8a102cfb4d9ce7cc18a6ce66b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2848646188612922922, guid: f5150bf8a102cfb4d9ce7cc18a6ce66b, type: 3}
       propertyPath: m_RootOrder
@@ -1840,6 +1892,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cloud 6 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2191353553970289876, guid: f5150bf8a102cfb4d9ce7cc18a6ce66b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2848646188612922922, guid: f5150bf8a102cfb4d9ce7cc18a6ce66b, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -2020,6 +2076,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameUI
       objectReference: {fileID: 0}
+    - target: {fileID: 7038372500505863069, guid: 46eb938784f481545a73b34afca83bb5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46eb938784f481545a73b34afca83bb5, type: 3}
 --- !u!1001 &1230652580
@@ -2177,6 +2237,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cloud 2 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2026915188140189434, guid: c4ab5459398140243b5f2a47a11728b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3055047639965144501, guid: c4ab5459398140243b5f2a47a11728b5, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -2242,6 +2306,10 @@ PrefabInstance:
     - target: {fileID: 1531240811090613241, guid: 543aec0514c6af749bec223eefc0d7a5, type: 3}
       propertyPath: m_Name
       value: Cloud 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1531240811090613241, guid: 543aec0514c6af749bec223eefc0d7a5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4085665986228641153, guid: 543aec0514c6af749bec223eefc0d7a5, type: 3}
       propertyPath: m_Enabled
@@ -2458,6 +2526,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cloud 4 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7833788301566320426, guid: 65a268be621dbde4885f321f3f8faa77, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65a268be621dbde4885f321f3f8faa77, type: 3}
 --- !u!4 &1435630409 stripped
@@ -2479,6 +2551,10 @@ PrefabInstance:
     - target: {fileID: 2191353553970289876, guid: f5150bf8a102cfb4d9ce7cc18a6ce66b, type: 3}
       propertyPath: m_Name
       value: Cloud 6 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2191353553970289876, guid: f5150bf8a102cfb4d9ce7cc18a6ce66b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2848646188612922922, guid: f5150bf8a102cfb4d9ce7cc18a6ce66b, type: 3}
       propertyPath: m_RootOrder
@@ -2549,6 +2625,10 @@ PrefabInstance:
     - target: {fileID: 2026915188140189434, guid: c4ab5459398140243b5f2a47a11728b5, type: 3}
       propertyPath: m_Name
       value: Cloud 2 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2026915188140189434, guid: c4ab5459398140243b5f2a47a11728b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3055047639965144501, guid: c4ab5459398140243b5f2a47a11728b5, type: 3}
       propertyPath: m_RootOrder
@@ -2685,6 +2765,10 @@ PrefabInstance:
       value: RockyIsland (2)
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 95debd511970b0f459b7728d0f40a017, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 95debd511970b0f459b7728d0f40a017, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
@@ -2732,6 +2816,10 @@ PrefabInstance:
     - target: {fileID: 1517746346420097844, guid: d92fed9c208ab514d9dce988012d06d6, type: 3}
       propertyPath: m_Name
       value: Cloud 5 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1517746346420097844, guid: d92fed9c208ab514d9dce988012d06d6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2267334848475381868, guid: d92fed9c208ab514d9dce988012d06d6, type: 3}
       propertyPath: m_RootOrder
@@ -2894,6 +2982,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cloud 1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 70747292198544456, guid: 53ed07edf79378b4bab4b4e1cb12591e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6433341617360789816, guid: 53ed07edf79378b4bab4b4e1cb12591e, type: 3}
       propertyPath: sceneViewId
       value: 9
@@ -2968,6 +3060,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cloud 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1517746346420097844, guid: d92fed9c208ab514d9dce988012d06d6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2267334848475381868, guid: d92fed9c208ab514d9dce988012d06d6, type: 3}
       propertyPath: m_RootOrder
       value: 21
@@ -3033,6 +3129,10 @@ PrefabInstance:
     - target: {fileID: 70747292198544456, guid: 53ed07edf79378b4bab4b4e1cb12591e, type: 3}
       propertyPath: m_Name
       value: Cloud 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 70747292198544456, guid: 53ed07edf79378b4bab4b4e1cb12591e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6433341617360789816, guid: 53ed07edf79378b4bab4b4e1cb12591e, type: 3}
       propertyPath: sceneViewId
@@ -3248,6 +3348,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cloud 5 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1517746346420097844, guid: d92fed9c208ab514d9dce988012d06d6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2267334848475381868, guid: d92fed9c208ab514d9dce988012d06d6, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -3387,6 +3491,10 @@ PrefabInstance:
     - target: {fileID: 2026915188140189434, guid: c4ab5459398140243b5f2a47a11728b5, type: 3}
       propertyPath: m_Name
       value: Cloud 2 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2026915188140189434, guid: c4ab5459398140243b5f2a47a11728b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3055047639965144501, guid: c4ab5459398140243b5f2a47a11728b5, type: 3}
       propertyPath: m_RootOrder

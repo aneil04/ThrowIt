@@ -7250,7 +7250,6 @@ GameObject:
   - component: {fileID: 4290702044828878331}
   - component: {fileID: 51008820060168326}
   - component: {fileID: 6826699999993212897}
-  - component: {fileID: 4810986526754137482}
   - component: {fileID: 362200563495701628}
   - component: {fileID: 4272237924518610780}
   - component: {fileID: 2148741010410423591}
@@ -7389,33 +7388,6 @@ MonoBehaviour:
   jumpForcePowerupIncrease: 100
   healthRegenInterval: 0.5
   healthRegenAmount: 5
---- !u!114 &4810986526754137482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4810986526754137483}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c030947cbb5c87246807c0054fef35b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerStats: {fileID: 6826699999993212897}
-  joystick: {fileID: 6340346042241646656}
-  rb: {fileID: 4810986526754137525}
-  turnSmoothTime: 0.03
-  pv: {fileID: 4290702044828878331}
-  playerAnimator: {fileID: 1493666674509475205}
-  jumpForce: 400
-  raycastOrigin: {fileID: 2413104536683433117}
-  jumpDelay: 0
-  jumpParticlesPos: {fileID: 8309942469447457898}
-  jumpParticles: {fileID: 1442799361028993830, guid: a97469b4ac5f6fe478d6cbba65e778e6, type: 3}
-  xBounds: {x: -50, y: 50}
-  yBounds: {x: -50, y: 50}
-  isHit: 0
-  hitTime: 0
 --- !u!114 &362200563495701628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7433,6 +7405,10 @@ MonoBehaviour:
   rb: {fileID: 4810986526754137525}
   gameUI: {fileID: 3805015685969753135}
   deathScreenUI: {fileID: 7099927682282350432}
+  graphics: {fileID: 2680941314314426523}
+  screenUI: {fileID: 1507850354442139158}
+  manager: {fileID: 3635727429077630983}
+  playerMove: {fileID: 0}
 --- !u!114 &4272237924518610780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7493,7 +7469,7 @@ MonoBehaviour:
   state: 0
   moveDistance: 5
   escapeRange: 10
-  attackRange: 10
+  attackRange: 15
   grabDistance: 2.5
   minObjDistace: 10
   agent: {fileID: 2666634579299195663}
@@ -9352,7 +9328,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4810986526754137482}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerMove, Assembly-CSharp
         m_MethodName: Jump
         m_Mode: 1
@@ -9404,8 +9380,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4228754571426666074}
-  - component: {fileID: 1290165133952361729}
   - component: {fileID: 4737084541985433377}
+  - component: {fileID: 6866637939311014677}
   m_Layer: 0
   m_Name: AimAssist
   m_TagString: Untagged
@@ -9427,8 +9403,24 @@ Transform:
   m_Father: {fileID: 4810986526754137526}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1290165133952361729
-SphereCollider:
+--- !u!114 &4737084541985433377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694831329104211211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b87d921e917ed498adc9e5f3d94615, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabPos: {fileID: 4810986528178999665}
+  aimRange: 35
+  grab: {fileID: 4810986527496080403}
+  photonView: {fileID: 4290702044828878331}
+--- !u!65 &6866637939311014677
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -9438,24 +9430,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 17
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4737084541985433377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7694831329104211211}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1b87d921e917ed498adc9e5f3d94615, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grabPos: {fileID: 4810986528178999665}
-  aimRange: 35
-  grab: {fileID: 4810986527496080403}
-  photonView: {fileID: 4290702044828878331}
+  m_Size: {x: 1, y: 1.8977876, z: 13.75785}
+  m_Center: {x: 0, y: 1.0511062, z: -7.867782}
 --- !u!1 &7979723399067468116
 GameObject:
   m_ObjectHideFlags: 0
@@ -11223,17 +11199,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec536a7718376554185e4a856d5ae230, type: 3}
---- !u!114 &6340346042241646656 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3881087803549984439, guid: ec536a7718376554185e4a856d5ae230, type: 3}
-  m_PrefabInstance: {fileID: 7070945986921408247}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42844a4fccbd54746b90cade4ff70f73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &6340346042241646659 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3881087803549984436, guid: ec536a7718376554185e4a856d5ae230, type: 3}

@@ -10,7 +10,7 @@ using TMPro;
 public class Grab : MonoBehaviourPun
 {
     public PlayerStats playerStats;
-    List<GameObject> currentCollisions = new List<GameObject>();
+    private List<int> currentCollisions = new List<int>();
     public GameObject grabPosObj;
 
     public GameObject currentGrab;
@@ -56,18 +56,18 @@ public class Grab : MonoBehaviourPun
             Outline outlineScript = col.gameObject.GetComponent<Outline>();
             outlineScript.enabled = true;
 
-            this.currentCollisions.Add(col.gameObject);
+            this.currentCollisions.Add(col.gameObject.GetComponent<PhotonView>().ViewID);
         }
     }
 
     private void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.tag == "Grabable" && currentCollisions.Contains(col.gameObject))
+        if (col.gameObject.tag == "Grabable" && currentCollisions.Contains(col.gameObject.GetComponent<PhotonView>().ViewID))
         {
             Outline outlineScript = col.gameObject.GetComponent<Outline>();
             outlineScript.enabled = false;
 
-            this.currentCollisions.Remove(col.gameObject); //change to store viewID not actual gameobject 
+            this.currentCollisions.Remove(col.gameObject.GetComponent<PhotonView>().ViewID); //change to store viewID not actual gameobject 
         }
     }
 
@@ -76,7 +76,6 @@ public class Grab : MonoBehaviourPun
         if (obj.tag != "Grabable") { return false; }
         if (obj.GetComponent<Mass>().getMass() > playerStats.Strength) { return false; }
 
-        //TODO: put an actual function here 
         playerStats.Strength += obj.GetComponent<Mass>().getMass() / 3;
 
         return true;
@@ -86,12 +85,22 @@ public class Grab : MonoBehaviourPun
     {
         GameObject obj = PhotonView.Find(objViewID).gameObject;
         obj.GetComponent<ObjOwner>().OwnerViewID = playerViewID;
+
+        obj.GetComponent<Rigidbody>().isKinematic = true;
+        obj.GetComponent<BoxCollider>().enabled = false;
     }
 
     public void throwObject(int objViewID)
     {
+        if (aimAssistTarget != null)
+        {
+            this.transform.LookAt(aimAssistTarget);
+        }
         GameObject obj = PhotonView.Find(objViewID).gameObject;
         obj.GetComponent<ObjOwner>().OwnerViewID = -1;
+
+        obj.GetComponent<Rigidbody>().isKinematic = false;
+        obj.GetComponent<BoxCollider>().enabled = true;
     }
 
     public void GrabOrThrowObject()
@@ -103,14 +112,12 @@ public class Grab : MonoBehaviourPun
 
         if (!isGrabbing && grabCdTimer <= 0) //grab the object
         {
-            if (currentCollisions.Count > 0 && checkGrabConditions(this.currentCollisions[0]))
+            if (currentCollisions.Count > 0 && checkGrabConditions(PhotonView.Find(this.currentCollisions[0]).gameObject))
             {
                 grabCdTimer = grabCooldown;
                 isGrabbing = true;
-                this.currentGrab = this.currentCollisions[0];
-                this.numOfObjectsThrown++;
+                this.currentGrab = PhotonView.Find(this.currentCollisions[0]).gameObject;
 
-                this.currentGrab.GetComponent<ThrowInfo>().setSender(base.photonView.ViewID);
 
                 object[] content = new object[] { this.currentGrab.GetComponent<PhotonView>().ViewID, base.photonView.ViewID };
                 RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
@@ -123,13 +130,22 @@ public class Grab : MonoBehaviourPun
         }
         else if (isGrabbing) //throw the object 
         {
-            isGrabbing = false;
+            this.currentGrab.GetComponent<ThrowInfo>().setSender(base.photonView.ViewID);
+            this.numOfObjectsThrown++;
 
             object[] content = new object[] { this.currentGrab.GetComponent<PhotonView>().ViewID };
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
             PhotonNetwork.RaiseEvent(THROW_OBJ_CODE, content, raiseEventOptions, SendOptions.SendReliable);
 
             this.currentGrab = null;
+            isGrabbing = false;
+
+            foreach (int objId in this.currentCollisions) //disable outlines before clearing list
+            {
+                Outline outlineScript = PhotonView.Find(objId).gameObject.GetComponent<Outline>();
+                outlineScript.enabled = false;
+            }
+            this.currentCollisions.Clear();
 
             this.playerAnimator.SetBool("isCarrying", false);
             this.playerAnimator.SetBool("throw", true);

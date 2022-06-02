@@ -11,23 +11,32 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 {
     public TextMeshProUGUI nameInput;
     private bool isConnecting;
+    public PlayerName pName;
 
     public void connectToServer()
     {
-        if (PhotonNetwork.IsConnected)
+        SceneManager.LoadScene("FloatingMap");
+
+        if (nameInput.text != null && nameInput.text != "")
         {
-            PhotonNetwork.JoinRandomRoom();
+            // PhotonNetwork.NickName = nameInput.text;
+            pName.SetPlayerName(nameInput.text);
         }
-        else
-        {
-            isConnecting = PhotonNetwork.ConnectUsingSettings();
-            // OnConnectedToMaster();
-        }
+
+        // if (PhotonNetwork.IsConnected)
+        // {
+        //     PhotonNetwork.JoinRandomRoom();
+        // }
+        // else
+        // {
+        //     isConnecting = PhotonNetwork.ConnectUsingSettings();
+        //     // OnConnectedToMaster();
+        // }
     }
 
     public override void OnConnectedToMaster()
     {
-        Debug.Log("Connected to master");
+        // Debug.Log("Connected to master");
 
         if (isConnecting)
         {
@@ -39,10 +48,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     //TODO: make sure to check that the error was because there were no availble rooms 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        Debug.Log("Join room failed. Trying to create room...");
+        // Debug.Log("Join room failed. Trying to create room...");
 
         RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 10;
+        roomOptions.MaxPlayers = 1;
 
         PhotonNetwork.CreateRoom(null, roomOptions);
         // CreateRoom();
@@ -63,7 +72,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     //TODO: check num of players in room and close the room if it is full
     public override void OnJoinedRoom()
     {
-        Debug.Log("Joined room. Loading level...");
+        // Debug.Log("Joined room. Loading level...");
 
         if (nameInput.text != null && nameInput.text != "")
         {

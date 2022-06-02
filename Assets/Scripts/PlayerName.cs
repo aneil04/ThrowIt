@@ -5,11 +5,15 @@ using TMPro;
 using Photon.Pun;
 public class PlayerName : MonoBehaviour
 {
-    public void SetPlayerName(string value) {
-        if (value == null || value == "") {
-            return;
-        }
+    public string playerName = "";
 
-        PhotonNetwork.NickName = value;
+    void Awake()
+    {
+        DontDestroyOnLoad(transform.gameObject);
+    }
+    
+    public void SetPlayerName(string value)
+    {
+        playerName = value;
     }
 }

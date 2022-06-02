@@ -69,12 +69,25 @@ public class AgentManager : MonoBehaviour
 
                 agent.enabled = true;
                 agent.velocity = Vector3.zero;
+                if (!agent.isOnNavMesh)
+                {
+                    agent.enabled = false;
+                }
             }
 
             return;
         }
 
-        if (agent.velocity.magnitude > 0.1f)
+        if (!agent)
+        {
+            return;
+        }
+        if (!agent.isOnNavMesh)
+        {
+            return;
+        }
+
+        if (agent.velocity.magnitude > 0.1f && !isHit)
         {
             playerAnimator.SetBool("isRunning", true);
         }
@@ -95,7 +108,7 @@ public class AgentManager : MonoBehaviour
                 attack();
                 break;
             default:
-                state = 0;
+                // state = 0;
                 break;
         }
     }
@@ -104,23 +117,15 @@ public class AgentManager : MonoBehaviour
     {
         if (grab.getIsGrabbing())
         {
+            Debug.Log("got in here");
             state = 1;
         }
-
-        // // get distance to nearest enemy and move away if within certain range
-        // if (distToNearestEnemy() < escapeRange)
-        // {
-        //     Vector3 direction = this.transform.position - nearestEnemy.transform.position;
-        //     Vector3 newPos = this.transform.position + direction;
-        //     agent.SetDestination(newPos);
-
-        //     return;
-        // }
 
         //get target object if no target identified or target has been picked up
         if (targetObj == null || targetObj.GetComponent<ObjOwner>().OwnerViewID != -1)
         {
             targetObj = getTargetObj();
+            return;
         }
 
         //move to target object 
@@ -131,12 +136,12 @@ public class AgentManager : MonoBehaviour
             targetObj = null;
             //grab object and enable move state
             grab.GrabOrThrowObject();
-            distToNearestEnemy();
+            setNearestEnemy();
             state = 1;
         }
     }
 
-    private float distToNearestEnemy() //min dist to a player that is currently grabbing an object 
+    private void setNearestEnemy() //min dist to a player that is currently grabbing an object 
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
@@ -149,12 +154,11 @@ public class AgentManager : MonoBehaviour
                 if (dist < minDist)
                 {
                     nearestEnemy = player;
+                    Debug.Log("enemy: " + player.GetComponent<PhotonView>().ViewID);
                     minDist = dist;
                 }
             }
         }
-
-        return minDist;
     }
 
     private GameObject getTargetObj()
@@ -197,7 +201,7 @@ public class AgentManager : MonoBehaviour
             return;
         }
 
-        float dist = Vector3.Distance(this.transform.position, nearestEnemy.transform.position); //sets the nearestEnemy variable 
+        float dist = Vector3.Distance(this.transform.position, nearestEnemy.transform.position);
 
         // if an enemy comes within a certain range, then attack 
         if (dist < attackRange)
@@ -213,6 +217,7 @@ public class AgentManager : MonoBehaviour
     private bool threwObj = false;
     private void attack() //state 2
     {
+        agent.SetDestination(nearestEnemy.transform.position);
         //throw object 
         if (!threwObj)
         {

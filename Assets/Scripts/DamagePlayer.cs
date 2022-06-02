@@ -6,9 +6,9 @@ using UnityEngine.AI;
 
 public class DamagePlayer : MonoBehaviour
 {
-    public Mass objMass;
-    public Rigidbody rb;
-    public ThrowInfo info;
+    private Mass objMass;
+    private Rigidbody rb;
+    private ThrowInfo info;
 
     void Start() {
         objMass = GetComponent<Mass>();
@@ -22,7 +22,10 @@ public class DamagePlayer : MonoBehaviour
         if (col.gameObject.tag != "Player") { return; }
 
         GameObject playerToDamage = col.gameObject;
-
+        if (playerToDamage == null) {
+            return;
+        }
+        
         if (!info.getIsThrowing() || info.getSender() == playerToDamage.GetComponent<PhotonView>().ViewID) { return; }
 
         PlayerDamage playerDamage = playerToDamage.GetComponent<PlayerDamage>();

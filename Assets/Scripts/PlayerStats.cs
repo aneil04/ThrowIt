@@ -100,7 +100,6 @@ public class PlayerStats : MonoBehaviour, IPunObservable
 
     public void setFields()
     {
-        Debug.Log("updated stats");
         killedByField.text = "Killed by: " + killedBy;
         timeAliveField.text = "Time alive: " + (int)(Time.timeSinceLevelLoad) + "s";
         numKillsField.text = "Kills: " + kills;

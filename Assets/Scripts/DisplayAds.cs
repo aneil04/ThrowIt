@@ -14,15 +14,15 @@ public class DisplayAds : MonoBehaviour
     public PlayerDamage playerDamage;
 
     void Start() {
-        Advertisement.Initialize("4464653");
+        Advertisement.Initialize(gameID);
     }
 
     public void displayAd()
     {
-        if (Advertisement.IsReady("Interstitial Android"))
-        {
-            Advertisement.Show("Interstitial Android");
-            //call revive method 
-        }
+        // if (Advertisement.IsReady())
+        // {
+        //     Advertisement.Show("Interstitial Android");
+        //     //call revive method 
+        // }
     }
 }

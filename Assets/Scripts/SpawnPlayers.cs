@@ -19,20 +19,12 @@ public class SpawnPlayers : MonoBehaviourPun
     {
         Vector3 spawnPos = new Vector3(Random.Range(xBounds.x, xBounds.y), yHeight, Random.Range(zBounds.x, zBounds.y));
         object[] customPlayerData = { };
-        GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPos, Quaternion.identity, 0, customPlayerData);
+        GameObject player = Instantiate(playerPrefab, spawnPos, Quaternion.identity);
 
         for (int x = 0; x < numOfAgents; x++)
         {
             spawnAgent();
         }
-    }
-
-    private void spawnAgent()
-    {
-        //instantiate here
-        Vector3 spawnPos = new Vector3(Random.Range(xBounds.x, xBounds.y), yHeight, Random.Range(zBounds.x, zBounds.y));
-        object[] customPlayerData = { };
-        GameObject player = PhotonNetwork.Instantiate(agentPrefab.name, spawnPos, Quaternion.identity, 0, customPlayerData);
     }
 
     public void agentDied()
@@ -46,4 +38,13 @@ public class SpawnPlayers : MonoBehaviourPun
         yield return new WaitForSeconds(5f);
         spawnAgent();
     }
+
+    private void spawnAgent()
+    {
+        //instantiate here
+        Vector3 spawnPos = new Vector3(Random.Range(xBounds.x, xBounds.y), yHeight, Random.Range(zBounds.x, zBounds.y));
+        object[] customPlayerData = { };
+        GameObject player = PhotonNetwork.InstantiateRoomObject(agentPrefab.name, spawnPos, Quaternion.identity, 0, customPlayerData);
+    }
+
 }

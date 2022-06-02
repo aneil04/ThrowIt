@@ -14,7 +14,12 @@ public class PlayerDamage : MonoBehaviourPunCallbacks
     public GameObject deathScreenUI;
     private bool isDead;
 
-    private int lastPlayerDamage = 0;
+    private int lastPlayerDamage = -1;
+
+    public GameObject graphics;
+    public GameObject screenUI;
+    public AgentManager manager;
+    public PlayerMove playerMove;
 
     void Start()
     {
@@ -22,11 +27,12 @@ public class PlayerDamage : MonoBehaviourPunCallbacks
         deathScreenUI.SetActive(false);
     }
 
-    void Update() {
+    void Update()
+    {
         // damagePlayer(1f, this.photonView.ViewID);
-        if (transform.position.y <= -10) {
-            damagePlayer(1000, lastPlayerDamage);
-            Debug.Log("fell");
+        if (transform.position.y <= -10 && !isDead)
+        {
+            killPlayer(lastPlayerDamage);
         }
     }
 
@@ -38,10 +44,44 @@ public class PlayerDamage : MonoBehaviourPunCallbacks
 
         if (playerStats.Health <= 0 && !isDead)
         {
-            isDead = true;
-            PhotonView.Find(killedByViewId).gameObject.GetComponent<PlayerStats>().incrementKills();
+            killPlayer(killedByViewId);
+        }
+    }
+
+    private void killPlayer(int killedByViewId)
+    {
+        isDead = true;
+        if (lastPlayerDamage != -1)
+        {
+            if (PhotonView.Find(lastPlayerDamage) != null)
+            {
+                PhotonView.Find(lastPlayerDamage).gameObject.GetComponent<PlayerStats>().incrementKills();
+            }
+            displayPlayerInfo("---");
+        }
+        else
+        {
             displayPlayerInfo(PhotonView.Find(killedByViewId).Owner.NickName);
         }
+
+        if (manager)
+        {
+            manager.enabled = false;
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<SpawnPlayers>().agentDied();
+        }
+        else if (playerMove)
+        {
+            playerMove.enabled = false;
+        }
+
+        //disable scripts and graphics 
+        graphics.SetActive(false);
+        screenUI.SetActive(false);
+
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        GetComponent<Rigidbody>().isKinematic = true;
+
+        GetComponent<BoxCollider>().enabled = false;
     }
 
     public void displayPlayerInfo(string killedBy)
@@ -50,6 +90,11 @@ public class PlayerDamage : MonoBehaviourPunCallbacks
         playerStats.setFields();
         gameUI.SetActive(false);
         deathScreenUI.SetActive(true);
+
+        if (playerMove && photonView.IsMine)
+        {
+            GetComponent<IntersitialAd>().LoadAd();
+        }
     }
 
     private void displayKillInfo(string displayString)
@@ -67,7 +112,8 @@ public class PlayerDamage : MonoBehaviourPunCallbacks
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void revivePlayer() {
+    public void revivePlayer()
+    {
         Debug.Log("revived player");
     }
 }

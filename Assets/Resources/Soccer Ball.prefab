@@ -107,7 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
-  m_SynchronizeScale: 1
+  m_SynchronizeScale: 0
   m_UseLocal: 1
 --- !u!114 &1516521753044976866
 MonoBehaviour:
@@ -220,9 +220,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c193f528e9cd34f8bf667af3b3643a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objMass: {fileID: 0}
-  rb: {fileID: 0}
-  info: {fileID: 0}
 --- !u!1 &3301060281202418224
 GameObject:
   m_ObjectHideFlags: 0
